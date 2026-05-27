@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="zh">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>走陵 · 中国古墓文化平台</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;900&family=Noto+Sans+SC:wght@300;400;500&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;900&amp;family=Noto+Sans+SC:wght@300;400;500&amp;family=Cinzel:wght@400;600&amp;display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -158,13 +159,13 @@ nav{
 /* 主列表 */
 .tomb-list{display:flex;flex-direction:column;gap:1px;background:var(--border)}
 .tomb-list-head{
-  display:grid;grid-template-columns:2fr 0.8fr 1.2fr 0.8fr 1fr 1.2fr 0.7fr;
+  display:grid;grid-template-columns:2fr 0.8fr 1.2fr 1fr 0.9fr 1.2fr 1.6fr;
   background:var(--bg2);padding:10px 24px;
   border:1px solid var(--border);border-bottom:none;
 }
 .th{font-size:0.62rem;letter-spacing:0.2em;color:var(--text3);text-transform:uppercase}
 .tomb-row{
-  display:grid;grid-template-columns:2fr 0.8fr 1.2fr 0.8fr 1fr 1.2fr 0.7fr;
+  display:grid;grid-template-columns:2fr 0.8fr 1.2fr 1fr 0.9fr 1.2fr 1.6fr;
   background:var(--bg2);padding:0;
   border-left:1px solid var(--border);border-right:1px solid var(--border);
   cursor:pointer;transition:background 0.18s;
@@ -201,6 +202,38 @@ nav{
 .stars{color:var(--gold);font-size:0.75rem;letter-spacing:2px}
 .td-arrow{color:var(--text3);font-size:0.8rem;justify-content:flex-end}
 .tomb-row:hover .td-arrow{color:var(--gold)}
+
+.dual-rating{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:8px;
+  width:100%;
+}
+.rating-line{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  width:100%;
+}
+.rating-label{
+  width:42px;
+  font-size:0.72rem;
+  color:var(--text2);
+  letter-spacing:0.08em;
+  flex-shrink:0;
+}
+.stars-gold{
+  color:var(--gold2);
+  font-size:0.9rem;
+  letter-spacing:2px;
+}
+.stars-blue{
+  color:#8ba7c7;
+  font-size:0.9rem;
+  letter-spacing:2px;
+}
+
 
 /* 特色区 */
 .featured-section{max-width:1200px;margin:0 auto;padding:0 48px 64px;position:relative;z-index:1}
@@ -298,7 +331,7 @@ footer{
   nav{padding:0 24px}
   .tombs-section,.featured-section,.partner-section{padding-left:24px;padding-right:24px}
   .filter-bar{padding:0 24px}
-  .tomb-list-head,.tomb-row{grid-template-columns:2fr 0.8fr 1fr 0.8fr 1fr}
+  .tomb-list-head,.tomb-row{grid-template-columns:2fr 0.8fr 1fr 1fr 1.3fr}
   .tomb-row .td:nth-child(6),.tomb-row .td:nth-child(7),
   .tomb-list-head .th:nth-child(6),.tomb-list-head .th:nth-child(7){display:none}
   .evidence-inner{grid-template-columns:1fr;gap:40px}
@@ -317,327 +350,304 @@ footer{
 </style>
 </head>
 <body>
-
 <nav>
-  <a href="index.html" class="nav-logo">走陵</a>
-  <ul class="nav-links">
-    <li><a href="#tombs">陵墓</a></li>
-    <li><a href="#evidence">史籍辨伪</a></li>
-    <li><a href="#partner">找搭子</a></li>
-  </ul>
-  <a href="#partner" class="nav-cta">找走陵搭子</a>
+<a class="nav-logo" href="index.html">走陵</a>
+<ul class="nav-links">
+<li><a href="#tombs">陵墓</a></li>
+<li><a href="#evidence">史籍辨伪</a></li>
+<li><a href="#partner">找搭子</a></li>
+</ul>
+<a class="nav-cta" href="#partner">找走陵搭子</a>
 </nav>
-
 <!-- 英雄 -->
 <div class="hero">
-  <canvas class="hero-canvas" id="heroCanvas"></canvas>
-  <div class="hero-content">
-    <p class="hero-kicker">China's Ancient Tomb Culture Platform · 走陵</p>
-    <h1 class="hero-zh">走 陵</h1>
-    <p class="hero-en">ZOULING · IMPERIAL TOMBS OF CHINA</p>
-    <div class="hero-rule"></div>
-    <p class="hero-tagline">帝王终将沉睡<br>但文明仍在地下呼吸</p>
-    <div class="hero-stats">
-      <div class="hstat"><span class="hstat-n">13</span><span class="hstat-l">收录陵墓</span></div>
-      <div class="hstat"><span class="hstat-n">5</span><span class="hstat-l">历史朝代</span></div>
-      <div class="hstat"><span class="hstat-n">6</span><span class="hstat-l">地宫已开放</span></div>
-      <div class="hstat"><span class="hstat-n">8</span><span class="hstat-l">功能模块</span></div>
-    </div>
-  </div>
-  <div class="hero-scroll"></div>
+<canvas class="hero-canvas" id="heroCanvas"></canvas>
+<div class="hero-content">
+<p class="hero-kicker">China's Ancient Tomb Culture Platform · 走陵</p>
+<h1 class="hero-zh">走 陵</h1>
+<p class="hero-en">ZOULING · IMPERIAL TOMBS OF CHINA</p>
+<div class="hero-rule"></div>
+<p class="hero-tagline">帝王终将沉睡<br/>但文明仍在地下呼吸</p>
+<div class="hero-stats">
+<div class="hstat"><span class="hstat-n">13</span><span class="hstat-l">收录陵墓</span></div>
+<div class="hstat"><span class="hstat-n">5</span><span class="hstat-l">历史朝代</span></div>
+<div class="hstat"><span class="hstat-n">6</span><span class="hstat-l">地宫已开放</span></div>
+<div class="hstat"><span class="hstat-n">8</span><span class="hstat-l">功能模块</span></div>
 </div>
-
+</div>
+<div class="hero-scroll"></div>
+</div>
 <!-- 筛选栏 -->
 <div class="filter-bar">
-  <button class="filter-btn active" onclick="filterTombs('all',this)">全部陵墓</button>
-  <button class="filter-btn" onclick="filterTombs('秦',this)">秦</button>
-  <button class="filter-btn" onclick="filterTombs('汉',this)">汉</button>
-  <button class="filter-btn" onclick="filterTombs('唐',this)">唐</button>
-  <button class="filter-btn" onclick="filterTombs('明',this)">明</button>
-  <button class="filter-btn" onclick="filterTombs('open',this)">地宫开放</button>
-  <div class="filter-search">
-    <span class="search-icon">⌕</span>
-    <input type="text" placeholder="搜索陵墓或墓主人…" oninput="searchTombs(this.value)">
-  </div>
+<button class="filter-btn active" onclick="filterTombs('all',this)">全部陵墓</button>
+<button class="filter-btn" onclick="filterTombs('秦',this)">秦</button>
+<button class="filter-btn" onclick="filterTombs('汉',this)">汉</button>
+<button class="filter-btn" onclick="filterTombs('唐',this)">唐</button>
+<button class="filter-btn" onclick="filterTombs('明',this)">明</button>
+<button class="filter-btn" onclick="filterTombs('open',this)">地宫开放</button>
+<div class="filter-search">
+<span class="search-icon">⌕</span>
+<input oninput="searchTombs(this.value)" placeholder="搜索陵墓或墓主人…" type="text"/>
 </div>
-
+</div>
 <!-- 陵墓列表 -->
-<section id="tombs" class="tombs-section reveal">
-  <div class="tombs-header">
-    <div>
-      <p class="tombs-label">陵墓数据库</p>
-      <h2 class="tombs-title">走陵人视角，才是真实参观价值</h2>
-    </div>
-    <p class="tombs-count" id="tombCount">共 13 座陵墓</p>
-  </div>
-  <div class="tomb-list-head">
-    <span class="th">陵墓</span>
-    <span class="th">朝代</span>
-    <span class="th">墓主人</span>
-    <span class="th">城市</span>
-    <span class="th">等级</span>
-    <span class="th">开放状态</span>
-    <span class="th">推荐</span>
-  </div>
-  <div class="tomb-list" id="tombList">
+<section class="tombs-section reveal" id="tombs">
+<div class="tombs-header">
+<div>
+<p class="tombs-label">陵墓数据库</p>
+<h2 class="tombs-title">走陵人视角，才是真实参观价值</h2>
+</div>
+<p class="tombs-count" id="tombCount">共 13 座陵墓</p>
+</div>
+<div class="tomb-list-head">
+<span class="th">陵墓</span>
+<span class="th">朝代</span>
+<span class="th">墓主人</span>
+<span class="th">等级</span>
+<span class="th">城市</span>
+<span class="th">开放状态</span>
+<span class="th">推荐 / 阴间</span>
+</div>
+<div class="tomb-list" id="tombList">
+<a class="tomb-row" data-dynasty="秦" data-open="part" href="qin-mausoleum.html">
 
-    <a href="qin-mausoleum.html" class="tomb-row" data-dynasty="秦" data-open="part">
-      <div class="td td-name"><span class="tomb-name-text">秦始皇帝陵</span><span class="tomb-owner-text">嬴政 · 前210年</span></div>
-      <div class="td td-dynasty"><span class="dy-qin">秦</span></div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">秦始皇（嬴政）</div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">西安</div>
-      <div class="td td-level"><span class="lv-emp">帝陵</span></div>
-      <div class="td"><span class="open-part">地面开放</span></div>
-      <div class="td td-arrow"><span class="stars">★★★</span></div>
-    </a>
 
-    <a href="#" class="tomb-row" data-dynasty="汉" data-open="open">
-      <div class="td td-name"><span class="tomb-name-text">汉阳陵</span><span class="tomb-owner-text">刘启 · 前188年</span></div>
-      <div class="td td-dynasty"><span class="dy-han">汉</span></div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">汉景帝（刘启）</div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">西安</div>
-      <div class="td td-level"><span class="lv-emp">帝陵</span></div>
-      <div class="td"><span class="open-y">地宫开放</span></div>
-      <div class="td td-arrow"><span class="stars">★★★★</span></div>
-    </a>
 
-    <a href="#" class="tomb-row" data-dynasty="汉" data-open="part">
-      <div class="td td-name"><span class="tomb-name-text">汉茂陵</span><span class="tomb-owner-text">刘彻 · 前87年</span></div>
-      <div class="td td-dynasty"><span class="dy-han">汉</span></div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">汉武帝（刘彻）</div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">咸阳</div>
-      <div class="td td-level"><span class="lv-emp">帝陵</span></div>
-      <div class="td"><span class="open-part">部分开放</span></div>
-      <div class="td td-arrow"><span class="stars">★</span></div>
-    </a>
 
-    <a href="#" class="tomb-row" data-dynasty="汉" data-open="none">
-      <div class="td td-name"><span class="tomb-name-text">汉霸陵</span><span class="tomb-owner-text">刘恒 · 前157年</span></div>
-      <div class="td td-dynasty"><span class="dy-han">汉</span></div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">汉文帝（刘恒）</div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">西安</div>
-      <div class="td td-level"><span class="lv-emp">帝陵</span></div>
-      <div class="td"><span class="open-n">未开放</span></div>
-      <div class="td td-arrow"><span class="stars">★</span></div>
-    </a>
 
-    <a href="#" class="tomb-row" data-dynasty="汉" data-open="part">
-      <div class="td td-name"><span class="tomb-name-text">汉杜陵</span><span class="tomb-owner-text">刘询 · 前49年</span></div>
-      <div class="td td-dynasty"><span class="dy-han">汉</span></div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">汉宣帝（刘询）</div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">西安</div>
-      <div class="td td-level"><span class="lv-emp">帝陵</span></div>
-      <div class="td"><span class="open-part">地面封土</span></div>
-      <div class="td td-arrow"><span class="stars">★</span></div>
-    </a>
 
-    <a href="#" class="tomb-row" data-dynasty="唐" data-open="part">
-      <div class="td td-name"><span class="tomb-name-text">唐昭陵</span><span class="tomb-owner-text">李世民 · 649年</span></div>
-      <div class="td td-dynasty"><span class="dy-tang">唐</span></div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">唐太宗（李世民）</div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">咸阳</div>
-      <div class="td td-level"><span class="lv-emp">帝陵</span></div>
-      <div class="td"><span class="open-part">部分开放</span></div>
-      <div class="td td-arrow"><span class="stars">★★★★</span></div>
-    </a>
 
-    <a href="#" class="tomb-row" data-dynasty="唐" data-open="part">
-      <div class="td td-name"><span class="tomb-name-text">唐乾陵</span><span class="tomb-owner-text">李治·武则天 · 683年</span></div>
-      <div class="td td-dynasty"><span class="dy-tang">唐</span></div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">唐高宗·武则天</div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">咸阳</div>
-      <div class="td td-level"><span class="lv-emp">帝陵</span></div>
-      <div class="td"><span class="open-part">陵园开放</span></div>
-      <div class="td td-arrow"><span class="stars">★★★</span></div>
-    </a>
+<div class="td td-name"><span class="tomb-name-text">秦始皇帝陵</span><span class="tomb-owner-text">嬴政 · 前210年</span></div><div class="td td-dynasty"><span class="dy-qin">秦</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">秦始皇（嬴政）</div><div class="td td-level"><span class="lv-emp">帝陵</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">西安</div><div class="td"><span class="open-part">地面开放</span></div><div class="td"><div class="dual-rating"><div class="rating-line"><span class="rating-label">推荐</span><span class="stars-gold">★★★★★</span></div><div class="rating-line"><span class="rating-label">阴间</span><span class="stars-blue">★★★</span></div></div></div></a>
+<a class="tomb-row" data-dynasty="汉" data-open="open" href="#">
 
-    <a href="#" class="tomb-row" data-dynasty="唐" data-open="open">
-      <div class="td td-name"><span class="tomb-name-text">懿德太子墓</span><span class="tomb-owner-text">李重润 · 706年</span></div>
-      <div class="td td-dynasty"><span class="dy-tang">唐</span></div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">李重润（懿德太子）</div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">咸阳</div>
-      <div class="td td-level"><span class="lv-prince">王墓</span></div>
-      <div class="td"><span class="open-y">地宫开放</span></div>
-      <div class="td td-arrow"><span class="stars">★★★</span></div>
-    </a>
 
-    <a href="#" class="tomb-row" data-dynasty="唐" data-open="open">
-      <div class="td td-name"><span class="tomb-name-text">章怀太子墓</span><span class="tomb-owner-text">李贤 · 706年</span></div>
-      <div class="td td-dynasty"><span class="dy-tang">唐</span></div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">李贤（章怀太子）</div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">咸阳</div>
-      <div class="td td-level"><span class="lv-prince">王墓</span></div>
-      <div class="td"><span class="open-y">地宫开放</span></div>
-      <div class="td td-arrow"><span class="stars">★★★</span></div>
-    </a>
 
-    <a href="#" class="tomb-row" data-dynasty="唐" data-open="part">
-      <div class="td td-name"><span class="tomb-name-text">唐建陵</span><span class="tomb-owner-text">李亨·章敬皇后 · 762年</span></div>
-      <div class="td td-dynasty"><span class="dy-tang">唐</span></div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">唐肃宗（李亨）</div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">咸阳</div>
-      <div class="td td-level"><span class="lv-emp">帝陵</span></div>
-      <div class="td"><span class="open-part">地面封土</span></div>
-      <div class="td td-arrow"><span class="stars">★</span></div>
-    </a>
 
-    <a href="#" class="tomb-row" data-dynasty="明" data-open="open">
-      <div class="td td-name"><span class="tomb-name-text">明孝陵</span><span class="tomb-owner-text">朱元璋 · 1398年</span></div>
-      <div class="td td-dynasty"><span class="dy-ming">明</span></div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">明太祖（朱元璋）</div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">南京</div>
-      <div class="td td-level"><span class="lv-emp">帝陵</span></div>
-      <div class="td"><span class="open-y">开放</span></div>
-      <div class="td td-arrow"><span class="stars">—</span></div>
-    </a>
 
-    <a href="#" class="tomb-row" data-dynasty="汉" data-open="open">
-      <div class="td td-name"><span class="tomb-name-text">济阳三官庙汉墓</span><span class="tomb-owner-text">未知 · 东汉晚期</span></div>
-      <div class="td td-dynasty"><span class="dy-han">汉</span></div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">未知</div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">济南</div>
-      <div class="td td-level"><span>—</span></div>
-      <div class="td"><span class="open-y">开放</span></div>
-      <div class="td td-arrow"><span class="stars">—</span></div>
-    </a>
 
-    <a href="#" class="tomb-row" data-dynasty="汉" data-open="open">
-      <div class="td td-name"><span class="tomb-name-text">汉济北王墓</span><span class="tomb-owner-text">刘宽 · 西汉</span></div>
-      <div class="td td-dynasty"><span class="dy-han">汉</span></div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">济北王（刘宽）</div>
-      <div class="td" style="font-size:0.83rem;color:var(--text2)">济南</div>
-      <div class="td td-level"><span class="lv-prince">诸侯王墓</span></div>
-      <div class="td"><span class="open-y">开放</span></div>
-      <div class="td td-arrow"><span class="stars">★</span></div>
-    </a>
 
-  </div>
+<div class="td td-name"><span class="tomb-name-text">汉阳陵</span><span class="tomb-owner-text">刘启 · 前188年</span></div><div class="td td-dynasty"><span class="dy-han">汉</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">汉景帝（刘启）</div><div class="td td-level"><span class="lv-emp">帝陵</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">西安</div><div class="td"><span class="open-y">地宫开放</span></div><div class="td"><div class="dual-rating"><div class="rating-line"><span class="rating-label">推荐</span><span class="stars-gold">★★★★★</span></div><div class="rating-line"><span class="rating-label">阴间</span><span class="stars-blue">★★★</span></div></div></div></a>
+<a class="tomb-row" data-dynasty="汉" data-open="part" href="#">
+
+
+
+
+
+
+
+<div class="td td-name"><span class="tomb-name-text">汉茂陵</span><span class="tomb-owner-text">刘彻 · 前87年</span></div><div class="td td-dynasty"><span class="dy-han">汉</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">汉武帝（刘彻）</div><div class="td td-level"><span class="lv-emp">帝陵</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">咸阳</div><div class="td"><span class="open-part">部分开放</span></div><div class="td"><div class="dual-rating"><div class="rating-line"><span class="rating-label">推荐</span><span class="stars-gold">★★★★★</span></div><div class="rating-line"><span class="rating-label">阴间</span><span class="stars-blue">★★★★</span></div></div></div></a>
+<a class="tomb-row" data-dynasty="汉" data-open="none" href="#">
+
+
+
+
+
+
+
+<div class="td td-name"><span class="tomb-name-text">汉霸陵</span><span class="tomb-owner-text">刘恒 · 前157年</span></div><div class="td td-dynasty"><span class="dy-han">汉</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">汉文帝（刘恒）</div><div class="td td-level"><span class="lv-emp">帝陵</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">西安</div><div class="td"><span class="open-n">未开放</span></div><div class="td"><div class="dual-rating"><div class="rating-line"><span class="rating-label">推荐</span><span class="stars-gold">★★★</span></div><div class="rating-line"><span class="rating-label">阴间</span><span class="stars-blue">★</span></div></div></div></a>
+<a class="tomb-row" data-dynasty="汉" data-open="part" href="#">
+
+
+
+
+
+
+
+<div class="td td-name"><span class="tomb-name-text">汉杜陵</span><span class="tomb-owner-text">刘询 · 前49年</span></div><div class="td td-dynasty"><span class="dy-han">汉</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">汉宣帝（刘询）</div><div class="td td-level"><span class="lv-emp">帝陵</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">西安</div><div class="td"><span class="open-part">地面封土</span></div><div class="td"><div class="dual-rating"><div class="rating-line"><span class="rating-label">推荐</span><span class="stars-gold">★★</span></div><div class="rating-line"><span class="rating-label">阴间</span><span class="stars-blue">★</span></div></div></div></a>
+<a class="tomb-row" data-dynasty="唐" data-open="part" href="#">
+
+
+
+
+
+
+
+<div class="td td-name"><span class="tomb-name-text">唐昭陵</span><span class="tomb-owner-text">李世民 · 649年</span></div><div class="td td-dynasty"><span class="dy-tang">唐</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">唐太宗（李世民）</div><div class="td td-level"><span class="lv-emp">帝陵</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">咸阳</div><div class="td"><span class="open-part">部分开放</span></div><div class="td"><div class="dual-rating"><div class="rating-line"><span class="rating-label">推荐</span><span class="stars-gold">★★★</span></div><div class="rating-line"><span class="rating-label">阴间</span><span class="stars-blue">★★★★</span></div></div></div></a>
+<a class="tomb-row" data-dynasty="唐" data-open="part" href="#">
+
+
+
+
+
+
+
+<div class="td td-name"><span class="tomb-name-text">唐乾陵</span><span class="tomb-owner-text">李治·武则天 · 683年</span></div><div class="td td-dynasty"><span class="dy-tang">唐</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">唐高宗·武则天</div><div class="td td-level"><span class="lv-emp">帝陵</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">咸阳</div><div class="td"><span class="open-part">陵园开放</span></div><div class="td"><div class="dual-rating"><div class="rating-line"><span class="rating-label">推荐</span><span class="stars-gold">★★★★★</span></div><div class="rating-line"><span class="rating-label">阴间</span><span class="stars-blue">★★★</span></div></div></div></a>
+<a class="tomb-row" data-dynasty="唐" data-open="open" href="#">
+
+
+
+
+
+
+
+<div class="td td-name"><span class="tomb-name-text">懿德太子墓</span><span class="tomb-owner-text">李重润 · 706年</span></div><div class="td td-dynasty"><span class="dy-tang">唐</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">李重润（懿德太子）</div><div class="td td-level"><span class="lv-prince">王墓</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">咸阳</div><div class="td"><span class="open-y">地宫开放</span></div><div class="td"><div class="dual-rating"><div class="rating-line"><span class="rating-label">推荐</span><span class="stars-gold">★★★★</span></div><div class="rating-line"><span class="rating-label">阴间</span><span class="stars-blue">★★★</span></div></div></div></a>
+<a class="tomb-row" data-dynasty="唐" data-open="open" href="#">
+
+
+
+
+
+
+
+<div class="td td-name"><span class="tomb-name-text">章怀太子墓</span><span class="tomb-owner-text">李贤 · 706年</span></div><div class="td td-dynasty"><span class="dy-tang">唐</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">李贤（章怀太子）</div><div class="td td-level"><span class="lv-prince">王墓</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">咸阳</div><div class="td"><span class="open-y">地宫开放</span></div><div class="td"><div class="dual-rating"><div class="rating-line"><span class="rating-label">推荐</span><span class="stars-gold">★★★★</span></div><div class="rating-line"><span class="rating-label">阴间</span><span class="stars-blue">★★★</span></div></div></div></a>
+<a class="tomb-row" data-dynasty="唐" data-open="part" href="#">
+
+
+
+
+
+
+
+<div class="td td-name"><span class="tomb-name-text">唐建陵</span><span class="tomb-owner-text">李亨·章敬皇后 · 762年</span></div><div class="td td-dynasty"><span class="dy-tang">唐</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">唐肃宗（李亨）</div><div class="td td-level"><span class="lv-emp">帝陵</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">咸阳</div><div class="td"><span class="open-part">地面封土</span></div><div class="td"><div class="dual-rating"><div class="rating-line"><span class="rating-label">推荐</span><span class="stars-gold">★★★</span></div><div class="rating-line"><span class="rating-label">阴间</span><span class="stars-blue">★</span></div></div></div></a>
+<a class="tomb-row" data-dynasty="明" data-open="open" href="#">
+
+
+
+
+
+
+
+<div class="td td-name"><span class="tomb-name-text">明孝陵</span><span class="tomb-owner-text">朱元璋 · 1398年</span></div><div class="td td-dynasty"><span class="dy-ming">明</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">明太祖（朱元璋）</div><div class="td td-level"><span class="lv-emp">帝陵</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">南京</div><div class="td"><span class="open-y">开放</span></div><div class="td"><div class="dual-rating"><div class="rating-line"><span class="rating-label">推荐</span><span class="stars-gold">★★★</span></div><div class="rating-line"><span class="rating-label">阴间</span><span class="stars-blue">★</span></div></div></div></a>
+<a class="tomb-row" data-dynasty="汉" data-open="open" href="#">
+
+
+
+
+
+
+
+<div class="td td-name"><span class="tomb-name-text">济阳三官庙汉墓</span><span class="tomb-owner-text">未知 · 东汉晚期</span></div><div class="td td-dynasty"><span class="dy-han">汉</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">未知</div><div class="td td-level"><span>—</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">济南</div><div class="td"><span class="open-y">开放</span></div><div class="td"><div class="dual-rating"><div class="rating-line"><span class="rating-label">推荐</span><span class="stars-gold">★★★</span></div><div class="rating-line"><span class="rating-label">阴间</span><span class="stars-blue">★★★</span></div></div></div></a>
+<a class="tomb-row" data-dynasty="汉" data-open="open" href="#">
+
+
+
+
+
+
+
+<div class="td td-name"><span class="tomb-name-text">汉济北王墓</span><span class="tomb-owner-text">刘宽 · 西汉</span></div><div class="td td-dynasty"><span class="dy-han">汉</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">济北王（刘宽）</div><div class="td td-level"><span class="lv-prince">诸侯王墓</span></div><div class="td" style="font-size:0.83rem;color:var(--text2)">济南</div><div class="td"><span class="open-y">开放</span></div><div class="td"><div class="dual-rating"><div class="rating-line"><span class="rating-label">推荐</span><span class="stars-gold">★★★</span></div><div class="rating-line"><span class="rating-label">阴间</span><span class="stars-blue">★</span></div></div></div></a>
+</div>
 </section>
-
 <!-- 特色推荐 -->
 <section class="featured-section reveal">
-  <p class="feat-label">编辑精选</p>
-  <div class="feat-grid">
-    <a href="qin-mausoleum.html" class="feat-card big">
-      <div class="feat-bg-char">秦</div>
-      <p class="feat-era">秦朝 · 前210年 · 帝陵</p>
-      <h3 class="feat-name">秦始皇帝陵</h3>
-      <p class="feat-owner">嬴政 · 中国第一位皇帝</p>
-      <div class="feat-tags">
-        <span class="ftag">未发掘</span>
-        <span class="ftag">地面开放</span>
-        <span class="ftag">世界第八奇迹</span>
-      </div>
-      <div class="feat-highlight">你走过它，才真正理解「皇帝」二字的重量。</div>
-    </a>
-    <a href="#" class="feat-card">
-      <div class="feat-bg-char">唐</div>
-      <p class="feat-era">唐朝 · 683年 · 帝陵</p>
-      <h3 class="feat-name">唐乾陵</h3>
-      <p class="feat-owner">唐高宗 · 武则天</p>
-      <div class="feat-tags">
-        <span class="ftag">未发掘</span>
-        <span class="ftag o">陵园开放</span>
-        <span class="ftag">无字碑</span>
-      </div>
-    </a>
-    <a href="#" class="feat-card">
-      <div class="feat-bg-char">汉</div>
-      <p class="feat-era">西汉 · 前188年 · 帝陵</p>
-      <h3 class="feat-name">汉阳陵</h3>
-      <p class="feat-owner">汉景帝 刘启</p>
-      <div class="feat-tags">
-        <span class="ftag o">地宫开放</span>
-        <span class="ftag">透明地板</span>
-        <span class="ftag">裸陶俑</span>
-      </div>
-    </a>
-    <a href="#" class="feat-card">
-      <div class="feat-bg-char">唐</div>
-      <p class="feat-era">唐朝 · 649年 · 帝陵</p>
-      <h3 class="feat-name">唐昭陵</h3>
-      <p class="feat-owner">唐太宗 李世民</p>
-      <div class="feat-tags">
-        <span class="ftag">九嵕山</span>
-        <span class="ftag o">部分开放</span>
-        <span class="ftag">昭陵六骏</span>
-      </div>
-    </a>
-  </div>
+<p class="feat-label">编辑精选</p>
+<div class="feat-grid">
+<a class="feat-card big" href="qin-mausoleum.html">
+<div class="feat-bg-char">秦</div>
+<p class="feat-era">秦朝 · 前210年 · 帝陵</p>
+<h3 class="feat-name">秦始皇帝陵</h3>
+<p class="feat-owner">嬴政 · 中国第一位皇帝</p>
+<div class="feat-tags">
+<span class="ftag">未发掘</span>
+<span class="ftag">地面开放</span>
+<span class="ftag">世界第八奇迹</span>
+</div>
+<div class="feat-highlight">你走过它，才真正理解「皇帝」二字的重量。</div>
+</a>
+<a class="feat-card" href="#">
+<div class="feat-bg-char">唐</div>
+<p class="feat-era">唐朝 · 683年 · 帝陵</p>
+<h3 class="feat-name">唐乾陵</h3>
+<p class="feat-owner">唐高宗 · 武则天</p>
+<div class="feat-tags">
+<span class="ftag">未发掘</span>
+<span class="ftag o">陵园开放</span>
+<span class="ftag">无字碑</span>
+</div>
+</a>
+<a class="feat-card" href="#">
+<div class="feat-bg-char">汉</div>
+<p class="feat-era">西汉 · 前188年 · 帝陵</p>
+<h3 class="feat-name">汉阳陵</h3>
+<p class="feat-owner">汉景帝 刘启</p>
+<div class="feat-tags">
+<span class="ftag o">地宫开放</span>
+<span class="ftag">透明地板</span>
+<span class="ftag">裸陶俑</span>
+</div>
+</a>
+<a class="feat-card" href="#">
+<div class="feat-bg-char">唐</div>
+<p class="feat-era">唐朝 · 649年 · 帝陵</p>
+<h3 class="feat-name">唐昭陵</h3>
+<p class="feat-owner">唐太宗 李世民</p>
+<div class="feat-tags">
+<span class="ftag">九嵕山</span>
+<span class="ftag o">部分开放</span>
+<span class="ftag">昭陵六骏</span>
+</div>
+</a>
+</div>
 </section>
-
 <!-- 史籍辨伪 -->
-<section id="evidence" class="evidence-section">
-  <div class="evidence-inner reveal">
-    <div class="ev-left">
-      <p class="sec-label">史籍辨伪</p>
-      <h2 class="ev-title">在文献和遗址之间<br>寻找更真实的古代中国</h2>
-      <p class="ev-body">部分古籍因政治目的与文学夸饰而失真。平台以考古报告为第一手资料，对每一条史料记载给出可信度评定，打破两千年的历史误解。</p>
-      <div class="ev-quote">
-        <p class="ev-quote-tag">史籍记载 · 存疑</p>
-        <p class="ev-quote-text">「以人鱼膏为烛，度不灭者久之。」</p>
-        <p class="ev-quote-src">——《史记·秦始皇本纪》· 司马迁 · 西汉</p>
-      </div>
-    </div>
-    <div class="ev-verdict">
-      <p class="ev-verdict-tag">考古实证评定</p>
-      <div class="ev-badge">存疑 · 考古无直接支撑</div>
-      <div class="ev-points">
-        <div class="ev-point"><span class="ev-n">①</span><p class="ev-t">地宫空间密闭，氧气严重不足，无法支持长期燃烧，物理上不成立。</p></div>
-        <div class="ev-point"><span class="ev-n">②</span><p class="ev-t">「人鱼膏」学界主流考证为鲸鱼油脂，常温下数日即耗尽，「千年不灭」不符合燃烧原理。</p></div>
-        <div class="ev-point"><span class="ev-n">③</span><p class="ev-t">司马迁写《史记》有以秦谏汉武帝的政治目的，夸大奢靡是叙事策略，非纯粹记史。</p></div>
-      </div>
-    </div>
-  </div>
+<section class="evidence-section" id="evidence">
+<div class="evidence-inner reveal">
+<div class="ev-left">
+<p class="sec-label">史籍辨伪</p>
+<h2 class="ev-title">在文献和遗址之间<br/>寻找更真实的古代中国</h2>
+<p class="ev-body">部分古籍因政治目的与文学夸饰而失真。平台以考古报告为第一手资料，对每一条史料记载给出可信度评定，打破两千年的历史误解。</p>
+<div class="ev-quote">
+<p class="ev-quote-tag">史籍记载 · 存疑</p>
+<p class="ev-quote-text">「以人鱼膏为烛，度不灭者久之。」</p>
+<p class="ev-quote-src">——《史记·秦始皇本纪》· 司马迁 · 西汉</p>
+</div>
+</div>
+<div class="ev-verdict">
+<p class="ev-verdict-tag">考古实证评定</p>
+<div class="ev-badge">存疑 · 考古无直接支撑</div>
+<div class="ev-points">
+<div class="ev-point"><span class="ev-n">①</span><p class="ev-t">地宫空间密闭，氧气严重不足，无法支持长期燃烧，物理上不成立。</p></div>
+<div class="ev-point"><span class="ev-n">②</span><p class="ev-t">「人鱼膏」学界主流考证为鲸鱼油脂，常温下数日即耗尽，「千年不灭」不符合燃烧原理。</p></div>
+<div class="ev-point"><span class="ev-n">③</span><p class="ev-t">司马迁写《史记》有以秦谏汉武帝的政治目的，夸大奢靡是叙事策略，非纯粹记史。</p></div>
+</div>
+</div>
+</div>
 </section>
-
 <!-- 走陵结伴 -->
-<section id="partner" class="partner-section reveal">
-  <div class="partner-header">
-    <p class="feat-label">走陵结伴</p>
-    <h2 class="tombs-title">按陵墓匹配，找到真正同频的搭子</h2>
-  </div>
-  <div class="partner-grid">
-    <div class="partner-card">
-      <div class="pc-head">
-        <p class="pc-title">关中帝陵两日走 · 秦陵+汉陵</p>
-        <span class="pc-slots">2 / 4 人</span>
-      </div>
-      <p class="pc-meta">发起人：老陕西走陵 · 12月28日 · 自驾 · 欢迎有汉唐历史兴趣者</p>
-      <div class="pc-tags"><span class="pctag">西安</span><span class="pctag">帝陵</span><span class="pctag">自驾</span><span class="pctag">两日</span></div>
-    </div>
-    <div class="partner-card">
-      <div class="pc-head">
-        <p class="pc-title">唐乾陵专项走陵 · 无字碑下的沉默</p>
-        <span class="pc-slots">1 / 3 人</span>
-      </div>
-      <p class="pc-meta">发起人：武周研究者 · 元旦假期 · 步行深度游 · 需了解唐史背景</p>
-      <div class="pc-tags"><span class="pctag">咸阳</span><span class="pctag">唐代</span><span class="pctag">帝陵</span><span class="pctag">深度游</span></div>
-    </div>
-    <div class="partner-card">
-      <div class="pc-head">
-        <p class="pc-title">汉阳陵地宫探访 · 透明地板下的秘密</p>
-        <span class="pc-slots">3 / 6 人</span>
-      </div>
-      <p class="pc-meta">发起人：汉史爱好者 · 周末 · 地铁可达 · 适合初次走陵</p>
-      <div class="pc-tags"><span class="pctag">西安</span><span class="pctag">西汉</span><span class="pctag">地宫</span><span class="pctag">入门</span></div>
-    </div>
-    <div class="partner-card">
-      <div class="pc-head">
-        <p class="pc-title">济南汉墓一日走 · 冷门但精彩</p>
-        <span class="pc-slots">2 / 4 人</span>
-      </div>
-      <p class="pc-meta">发起人：山东陵猎人 · 待定 · 汉济北王墓+三官庙汉墓</p>
-      <div class="pc-tags"><span class="pctag">济南</span><span class="pctag">西汉</span><span class="pctag">小众</span><span class="pctag">免费</span></div>
-    </div>
-  </div>
+<section class="partner-section reveal" id="partner">
+<div class="partner-header">
+<p class="feat-label">走陵结伴</p>
+<h2 class="tombs-title">按陵墓匹配，找到真正同频的搭子</h2>
+</div>
+<div class="partner-grid">
+<div class="partner-card">
+<div class="pc-head">
+<p class="pc-title">关中帝陵两日走 · 秦陵+汉陵</p>
+<span class="pc-slots">2 / 4 人</span>
+</div>
+<p class="pc-meta">发起人：老陕西走陵 · 12月28日 · 自驾 · 欢迎有汉唐历史兴趣者</p>
+<div class="pc-tags"><span class="pctag">西安</span><span class="pctag">帝陵</span><span class="pctag">自驾</span><span class="pctag">两日</span></div>
+</div>
+<div class="partner-card">
+<div class="pc-head">
+<p class="pc-title">唐乾陵专项走陵 · 无字碑下的沉默</p>
+<span class="pc-slots">1 / 3 人</span>
+</div>
+<p class="pc-meta">发起人：武周研究者 · 元旦假期 · 步行深度游 · 需了解唐史背景</p>
+<div class="pc-tags"><span class="pctag">咸阳</span><span class="pctag">唐代</span><span class="pctag">帝陵</span><span class="pctag">深度游</span></div>
+</div>
+<div class="partner-card">
+<div class="pc-head">
+<p class="pc-title">汉阳陵地宫探访 · 透明地板下的秘密</p>
+<span class="pc-slots">3 / 6 人</span>
+</div>
+<p class="pc-meta">发起人：汉史爱好者 · 周末 · 地铁可达 · 适合初次走陵</p>
+<div class="pc-tags"><span class="pctag">西安</span><span class="pctag">西汉</span><span class="pctag">地宫</span><span class="pctag">入门</span></div>
+</div>
+<div class="partner-card">
+<div class="pc-head">
+<p class="pc-title">济南汉墓一日走 · 冷门但精彩</p>
+<span class="pc-slots">2 / 4 人</span>
+</div>
+<p class="pc-meta">发起人：山东陵猎人 · 待定 · 汉济北王墓+三官庙汉墓</p>
+<div class="pc-tags"><span class="pctag">济南</span><span class="pctag">西汉</span><span class="pctag">小众</span><span class="pctag">免费</span></div>
+</div>
+</div>
 </section>
-
 <footer>
-  <div class="footer-logo">走 陵</div>
-  <p class="footer-copy">以考古实证，还原曾经真实存在的那个世界 · 2026</p>
+<div class="footer-logo">走 陵</div>
+<p class="footer-copy">以考古实证，还原曾经真实存在的那个世界 · 2026</p>
 </footer>
-
 <script>
 // Canvas 背景动画
 const canvas = document.getElementById('heroCanvas');
