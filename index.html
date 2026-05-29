@@ -1,726 +1,883 @@
 <!DOCTYPE html>
-
 <html lang="zh">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>走陵 · 中国古墓文化平台</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;900&amp;family=Noto+Sans+SC:wght@300;400;500&amp;family=Cinzel:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>秦始皇帝陵 · 走陵</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;900&family=Noto+Sans+SC:wght@300;400;500&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#080806;--bg2:#111008;--bg3:#191408;--bg4:#221d0a;
-  --gold:#c49a1a;--gold2:#e0b830;--gold3:#f5d060;
-  --border:rgba(196,154,26,0.12);--border2:rgba(196,154,26,0.28);
-  --text:#e8e0cc;--text2:#b0a080;--text3:#6e6048;
-  --green:#1a6b4a;--green2:#2a9e6e;
-  --amber:#8a5a10;--amber2:#c88020;
-  --red:#8b2020;
-}
-html{scroll-behavior:smooth}
-body{font-family:'Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;cursor:default}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* 纹理 */
-body::before{
-  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+:root {
+  --bg:       #0a0a0a;
+  --bg2:      #111111;
+  --bg3:      #181818;
+  --bg4:      #202020;
+  --gold:     #c49a1a;
+  --gold2:    #e0b830;
+  --gold3:    #f0cc60;
+  --golddim:  rgba(196,154,26,0.15);
+  --border:   rgba(196,154,26,0.12);
+  --border2:  rgba(196,154,26,0.25);
+  --text:     #e8e0d0;
+  --text2:    #a09070;
+  --text3:    #50473a;
+  --green:    #1a6b4a;
+  --green2:   #2a9e6e;
+  --amber:    #8a5a10;
+  --amber2:   #c88020;
+  --red:      #8b2020;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans SC', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+/* 全局噪点纹理 */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; opacity: 0.4;
+}
+
+/* ── 顶部导航 ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 56px;
+  background: rgba(10,10,10,0.92);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+.nav-back {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.78rem; color: var(--text2);
+  text-decoration: none; letter-spacing: 0.1em;
+  transition: color 0.2s;
+}
+.nav-back:hover { color: var(--gold2); }
+.nav-back-arrow { font-size: 1rem; }
+.nav-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 0.85rem; font-weight: 600;
+  color: var(--gold); letter-spacing: 0.2em;
+}
+.nav-actions { display: flex; gap: 12px; }
+.nav-btn {
+  font-size: 0.72rem; letter-spacing: 0.12em;
+  padding: 6px 16px;
+  border: 1px solid var(--border2);
+  color: var(--text2); background: transparent;
+  cursor: pointer; font-family: 'Noto Sans SC', sans-serif;
+  transition: all 0.2s; text-decoration: none; display: inline-block;
+}
+.nav-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── 英雄区 ── */
+.hero {
+  position: relative; height: 70vh; min-height: 480px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse 100% 50% at 50% 0%,rgba(196,154,26,0.06) 0%,transparent 60%),
-    repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(196,154,26,0.018) 80px),
-    repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(196,154,26,0.012) 80px);
+    linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.0) 30%, rgba(10,10,10,0.5) 70%, rgba(10,10,10,1) 100%),
+    linear-gradient(135deg, #1a0e00 0%, #0d0800 40%, #1a1000 60%, #080500 100%);
+}
+/* 封土轮廓 SVG */
+.hero-mound {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 55%;
+}
+.hero-mound svg { width: 100%; height: 100%; }
+/* 光晕 */
+.hero-glow {
+  position: absolute;
+  width: 600px; height: 300px;
+  background: radial-gradient(ellipse, rgba(196,154,26,0.18) 0%, transparent 70%);
+  top: 25%; left: 50%; transform: translate(-50%, -50%);
+}
+/* 粒子 */
+.hero-particles {
+  position: absolute; inset: 0; overflow: hidden;
+}
+.particle {
+  position: absolute;
+  width: 1px; height: 1px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: float linear infinite;
+  opacity: 0;
+}
+@keyframes float {
+  0%   { opacity: 0; transform: translateY(0) translateX(0); }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.3; }
+  100% { opacity: 0; transform: translateY(-120px) translateX(var(--dx)); }
 }
 
-/* ── 导航 ── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  height:54px;display:flex;align-items:center;justify-content:space-between;
-  padding:0 48px;
-  background:rgba(8,8,6,0.94);
-  border-bottom:1px solid var(--border);
-  backdrop-filter:blur(16px);
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 64px 56px;
 }
-.nav-logo{
-  font-family:'Noto Serif SC',serif;font-weight:900;font-size:1.1rem;
-  color:var(--gold2);letter-spacing:0.25em;text-decoration:none;
+.hero-dynasty {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem; letter-spacing: 0.5em;
+  color: var(--gold); text-transform: uppercase;
+  margin-bottom: 14px;
+  animation: heroUp 1s ease both;
 }
-.nav-links{display:flex;gap:32px;list-style:none}
-.nav-links a{font-size:0.78rem;color:var(--text2);text-decoration:none;letter-spacing:0.1em;transition:color 0.2s}
-.nav-links a:hover{color:var(--gold2)}
-.nav-cta{
-  font-size:0.72rem;letter-spacing:0.15em;padding:7px 20px;
-  border:1px solid var(--border2);color:var(--gold);background:transparent;
-  cursor:pointer;font-family:'Noto Sans SC',sans-serif;transition:all 0.2s;text-decoration:none;
+.hero-title {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 900;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  line-height: 1.05; color: var(--text);
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+  animation: heroUp 1s 0.1s ease both;
+  text-shadow: 0 0 60px rgba(196,154,26,0.2);
 }
-.nav-cta:hover{background:rgba(196,154,26,0.08);border-color:var(--gold2)}
+.hero-en {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.65rem, 1.2vw, 0.8rem);
+  letter-spacing: 0.3em; color: var(--text3);
+  margin-bottom: 24px;
+  animation: heroUp 1s 0.15s ease both;
+}
+.hero-tagline {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  font-weight: 300; color: var(--text2);
+  letter-spacing: 0.08em;
+  animation: heroUp 1s 0.2s ease both;
+}
+.hero-tagline em { color: var(--gold); font-style: normal; }
 
-/* ── 英雄 ── */
-.hero{
-  position:relative;min-height:100vh;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:100px 40px 80px;overflow:hidden;
+.hero-badges {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-top: 24px;
+  animation: heroUp 1s 0.28s ease both;
 }
-.hero-canvas{position:absolute;inset:0;z-index:0}
-.hero-content{position:relative;z-index:2}
-.hero-kicker{
-  font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.5em;
-  color:var(--gold);text-transform:uppercase;margin-bottom:28px;
-  animation:up 1s ease both;
+.hbadge {
+  font-size: 0.68rem; letter-spacing: 0.12em;
+  padding: 4px 12px;
+  border: 1px solid;
 }
-.hero-zh{
-  font-family:'Noto Serif SC',serif;font-weight:900;
-  font-size:clamp(4.5rem,12vw,9rem);
-  line-height:1;letter-spacing:0.2em;
-  color:var(--gold2);margin-bottom:8px;
-  animation:up 1s 0.1s ease both;
-  text-shadow:0 0 80px rgba(196,154,26,0.25),0 0 200px rgba(196,154,26,0.1);
-}
-.hero-en{
-  font-family:'Cinzel',serif;font-size:clamp(0.6rem,1.2vw,0.78rem);
-  letter-spacing:0.4em;color:var(--text3);margin-bottom:32px;
-  animation:up 1s 0.15s ease both;
-}
-.hero-rule{
-  width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);
-  margin:0 auto 32px;animation:up 1s 0.2s ease both;
-}
-.hero-tagline{
-  font-family:'Noto Serif SC',serif;font-size:clamp(0.9rem,1.6vw,1.15rem);
-  font-weight:300;color:var(--text2);letter-spacing:0.12em;line-height:2;
-  max-width:540px;margin:0 auto 48px;
-  animation:up 1s 0.25s ease both;
-}
-.hero-stats{
-  display:flex;gap:0;border:1px solid var(--border);
-  animation:up 1s 0.35s ease both;
-}
-.hstat{
-  padding:20px 36px;border-right:1px solid var(--border);
-  display:flex;flex-direction:column;gap:4px;
-}
-.hstat:last-child{border-right:none}
-.hstat-n{font-family:'Cinzel',serif;font-size:1.8rem;color:var(--gold2);line-height:1}
-.hstat-l{font-size:0.65rem;letter-spacing:0.2em;color:var(--text3)}
-.hero-scroll{
-  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
-  font-size:0.62rem;letter-spacing:0.3em;color:var(--text3);
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  animation:up 1s 0.6s ease both;
-}
-.hero-scroll::after{
-  content:'';width:1px;height:40px;
-  background:linear-gradient(to bottom,var(--gold),transparent);
-  animation:scrollLine 2s ease-in-out infinite;
-}
-@keyframes scrollLine{0%,100%{opacity:0;transform:scaleY(0);transform-origin:top}50%{opacity:1;transform:scaleY(1)}}
+.hbadge-gold { border-color: var(--border2); color: var(--gold); }
+.hbadge-green { border-color: rgba(42,158,110,0.4); color: var(--green2); background: rgba(26,107,74,0.12); }
+.hbadge-gray { border-color: var(--text3); color: var(--text3); }
 
-/* ── 筛选栏 ── */
-.filter-bar{
-  position:sticky;top:54px;z-index:100;
-  background:rgba(8,8,6,0.96);backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);
-  padding:0 48px;
-  display:flex;align-items:center;gap:0;
-  overflow-x:auto;
-}
-.filter-bar::-webkit-scrollbar{display:none}
-.filter-btn{
-  font-size:0.72rem;letter-spacing:0.15em;
-  padding:16px 20px;color:var(--text2);background:transparent;
-  border:none;border-bottom:2px solid transparent;
-  cursor:pointer;white-space:nowrap;font-family:'Noto Sans SC',sans-serif;
-  transition:color 0.2s,border-color 0.2s;
-}
-.filter-btn:hover{color:var(--text)}
-.filter-btn.active{color:var(--gold2);border-bottom-color:var(--gold)}
-.filter-search{
-  margin-left:auto;display:flex;align-items:center;gap:8px;
-  padding:8px 14px;border:1px solid var(--border);background:transparent;
-}
-.filter-search input{
-  background:transparent;border:none;outline:none;
-  font-size:0.78rem;color:var(--text);font-family:'Noto Sans SC',sans-serif;
-  width:160px;letter-spacing:0.05em;
-}
-.filter-search input::placeholder{color:var(--text3)}
-.search-icon{color:var(--text3);font-size:0.9rem}
-
-/* ── 陵墓列表 ── */
-.tombs-section{max-width:1200px;margin:0 auto;padding:56px 48px;position:relative;z-index:1}
-.tombs-header{
-  display:flex;align-items:flex-end;justify-content:space-between;
-  margin-bottom:40px;gap:2rem;flex-wrap:wrap;
-}
-.tombs-label{font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
-.tombs-title{
-  font-family:'Noto Serif SC',serif;font-weight:900;
-  font-size:clamp(1.5rem,3vw,2.2rem);color:var(--text);letter-spacing:0.06em;
-}
-.tombs-count{font-size:0.8rem;color:var(--text3);letter-spacing:0.1em}
-
-/* 主列表 */
-.tomb-list{display:flex;flex-direction:column;gap:1px;background:var(--border)}
-.tomb-list-head{
-  display:grid;grid-template-columns:2fr 0.8fr 1.2fr 1fr 0.9fr 1.2fr 1.6fr;
-  background:var(--bg2);padding:10px 24px;
-  border:1px solid var(--border);border-bottom:none;
-}
-.th{font-size:0.62rem;letter-spacing:0.2em;color:var(--text3);text-transform:uppercase}
-.tomb-row{
-  display:grid;grid-template-columns:2fr 0.8fr 1.2fr 1fr 0.9fr 1.2fr 1.6fr;
-  background:var(--bg2);padding:0;
-  border-left:1px solid var(--border);border-right:1px solid var(--border);
-  cursor:pointer;transition:background 0.18s;
-  text-decoration:none;color:inherit;
-  align-items:stretch;
-}
-.tomb-row:last-child{border-bottom:1px solid var(--border)}
-.tomb-row:hover{background:var(--bg3)}
-.tomb-row:hover .tomb-name-text{color:var(--gold2)}
-.td{padding:18px 24px;display:flex;align-items:center;border-right:1px solid var(--border);font-size:0.85rem}
-.td:last-child{border-right:none}
-.td-name{flex-direction:column;align-items:flex-start;gap:3px}
-.tomb-name-text{
-  font-family:'Noto Serif SC',serif;font-size:1rem;font-weight:600;
-  color:var(--text);letter-spacing:0.05em;transition:color 0.18s;
-}
-.tomb-owner-text{font-size:0.72rem;color:var:#8a7a5a}
-.td-dynasty span{
-  font-size:0.72rem;padding:3px 10px;
-  border:1px solid;letter-spacing:0.1em;
-}
-.dy-qin{border-color:rgba(180,80,40,0.4);color:#d07050;background:rgba(180,80,40,0.1)}
-.dy-han{border-color:rgba(160,100,40,0.4);color:#c09050;background:rgba(160,100,40,0.1)}
-.dy-tang{border-color:rgba(160,120,40,0.4);color:#c0a040;background:rgba(160,120,40,0.1)}
-.dy-ming{border-color:rgba(100,140,80,0.4);color:#80b060;background:rgba(100,140,80,0.1)}
-.dy-other{border-color:var(--border2);color:var(--text2);background:transparent}
-.td-level span{font-size:0.72rem;padding:3px 10px;border:1px solid var(--border2);color:var(--text2)}
-.td-level .lv-emp{border-color:rgba(196,154,26,0.35);color:var(--gold);background:rgba(196,154,26,0.08)}
-.td-level .lv-prince{border-color:rgba(100,120,180,0.35);color:#8090d0;background:rgba(100,120,180,0.08)}
-.td-level .lv-side{border-color:rgba(120,100,160,0.35);color:#a080c0;background:rgba(120,100,160,0.08)}
-.td-level .lv-noble{border-color:rgba(100,140,120,0.35);color:#60a080;background:rgba(100,140,120,0.08)}
-.td-level .lv-common{border-color:rgba(100,100,100,0.35);color:#909090;background:rgba(100,100,100,0.08)}
-.td-level .lv-unknown{border-color:rgba(80,80,80,0.3);color:var(--text3);background:transparent}
-.open-tag{font-size:0.68rem;padding:2px 8px;border:1px solid;letter-spacing:0.06em}
-.open-y{border-color:rgba(42,158,110,0.4);color:var(--green2);background:rgba(26,107,74,0.1)}
-.open-part{border-color:rgba(196,154,26,0.3);color:var(--gold);background:rgba(196,154,26,0.07)}
-.open-n{border-color:var(--text3);color:var(--text3)}
-.stars{color:var(--gold);font-size:0.75rem;letter-spacing:2px}
-.td-arrow{color:var(--text3);font-size:0.8rem;justify-content:flex-end}
-.tomb-row:hover .td-arrow{color:var(--gold)}
-
-.dual-rating{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  gap:8px;
-  width:100%;
-}
-.rating-line{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  width:100%;
-}
-.rating-label{
-  width:42px;
-  font-size:0.72rem;
-  color:var(--text2);
-  letter-spacing:0.08em;
-  flex-shrink:0;
-}
-.stars-gold{
-  color:var(--gold2);
-  font-size:0.9rem;
-  letter-spacing:2px;
-}
-.stars-blue{
-  color:#8ba7c7;
-  font-size:0.9rem;
-  letter-spacing:2px;
+@keyframes heroUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: none; }
 }
 
+/* ── 快速信息栏 ── */
+.quickbar {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  display: flex; overflow-x: auto;
+}
+.quickbar::-webkit-scrollbar { display: none; }
+.qitem {
+  flex: 1; min-width: 120px;
+  padding: 18px 24px;
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 4px;
+}
+.qitem:last-child { border-right: none; }
+.qkey {
+  font-size: 0.62rem; letter-spacing: 0.25em;
+  color: var(--text3); text-transform: uppercase;
+}
+.qval {
+  font-size: 0.88rem; color: var(--text);
+  font-weight: 500;
+}
+.qval.open { color: var(--green2); }
+.qval.warn { color: var(--amber2); }
 
-/* 特色区 */
-.featured-section{max-width:1200px;margin:0 auto;padding:0 48px 64px;position:relative;z-index:1}
-.feat-label{font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
-.feat-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border)}
-.feat-card{
-  background:var(--bg2);padding:32px 28px;
-  cursor:pointer;transition:background 0.2s;
-  text-decoration:none;color:inherit;display:block;
-  position:relative;overflow:hidden;
+/* ── 主体布局 ── */
+.main {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 340px;
+  gap: 0; align-items: start;
 }
-.feat-card::before{
-  content:'';position:absolute;top:0;left:0;width:3px;height:0;
-  background:var(--gold);transition:height 0.35s ease;
+.content { border-right: 1px solid var(--border); }
+.sidebar { position: sticky; top: 56px; }
+
+/* ── 区块通用 ── */
+.block {
+  padding: 48px 56px;
+  border-bottom: 1px solid var(--border);
 }
-.feat-card:hover{background:var(--bg3)}
-.feat-card:hover::before{height:100%}
-.feat-card.big{grid-row:1/3;display:flex;flex-direction:column;justify-content:flex-end;min-height:340px}
-.feat-era{font-size:0.62rem;letter-spacing:0.3em;color:var(--text3);margin-bottom:8px}
-.feat-name{
-  font-family:'Noto Serif SC',serif;font-weight:900;
-  color:var(--gold2);letter-spacing:0.1em;margin-bottom:6px;
+.block-label {
+  font-size: 0.65rem; letter-spacing: 0.4em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
 }
-.feat-card.big .feat-name{font-size:2rem}
-.feat-card:not(.big) .feat-name{font-size:1.1rem}
-.feat-owner{font-size:0.78rem;color:var(--text3);margin-bottom:14px}
-.feat-tags{display:flex;gap:6px;flex-wrap:wrap}
-.ftag{font-size:0.6rem;padding:2px 8px;border:1px solid var(--border2);color:var(--text3);letter-spacing:0.06em}
-.ftag.o{border-color:rgba(42,158,110,0.4);color:var(--green2);background:rgba(26,107,74,0.1)}
-.feat-bg-char{
-  position:absolute;bottom:-10px;right:10px;
-  font-family:'Noto Serif SC',serif;font-weight:900;
-  font-size:7rem;color:rgba(196,154,26,0.04);
-  user-select:none;line-height:1;pointer-events:none;
+.block-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(to right, var(--border2), transparent);
 }
-.feat-highlight{
-  margin-top:16px;padding:12px 14px;
-  background:rgba(196,154,26,0.05);border-left:2px solid rgba(196,154,26,0.2);
-  font-size:0.78rem;color:var(--text2);line-height:1.8;
+.block-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.3rem; font-weight: 600;
+  color: var(--text); margin-bottom: 20px;
+  letter-spacing: 0.04em;
+}
+.block-p {
+  font-size: 0.9rem; color: var(--text2);
+  line-height: 1.95; margin-bottom: 14px;
+  letter-spacing: 0.03em;
+}
+.block-p:last-child { margin-bottom: 0; }
+
+/* ── 走陵人点评 ── */
+.review-cards { display: flex; flex-direction: column; gap: 12px; }
+.rcard {
+  padding: 18px 20px;
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.rcard-green {
+  background: rgba(26,107,74,0.1);
+  border-left: 3px solid var(--green2);
+}
+.rcard-amber {
+  background: rgba(138,90,16,0.1);
+  border-left: 3px solid var(--amber2);
+}
+.rcard-blue {
+  background: rgba(26,60,107,0.1);
+  border-left: 3px solid #4a7abf;
+}
+.rcard-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+.rcard-content { flex: 1; }
+.rcard-title {
+  font-size: 0.8rem; font-weight: 500;
+  margin-bottom: 6px; letter-spacing: 0.04em;
+}
+.rcard-green .rcard-title { color: var(--green2); }
+.rcard-amber .rcard-title { color: var(--amber2); }
+.rcard-blue .rcard-title { color: #4a7abf; }
+.rcard-text { font-size: 0.85rem; color: var(--text2); line-height: 1.85; }
+
+/* ── 折叠块 ── */
+.toggle {
+  border: 1px solid var(--border);
+  margin-bottom: 8px; overflow: hidden;
+}
+.toggle-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 18px; cursor: pointer;
+  background: var(--bg2);
+  font-size: 0.88rem; color: var(--text);
+  transition: background 0.2s; user-select: none;
+}
+.toggle-head:hover { background: var(--bg3); }
+.toggle-arrow {
+  font-size: 0.6rem; color: var(--gold);
+  transition: transform 0.25s; flex-shrink: 0;
+}
+.toggle.open .toggle-arrow { transform: rotate(90deg); }
+.toggle-body {
+  display: none; padding: 16px 20px;
+  background: var(--bg);
+  font-size: 0.85rem; color: var(--text2);
+  line-height: 1.9; border-top: 1px solid var(--border);
+}
+.toggle.open .toggle-body { display: block; }
+.toggle-p { margin-bottom: 10px; }
+.toggle-p:last-child { margin-bottom: 0; }
+
+/* 小列表 */
+.dot-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.dot-list li {
+  display: flex; gap: 10px; align-items: flex-start;
+  font-size: 0.85rem; color: var(--text2); line-height: 1.75;
+}
+.dot-list li::before {
+  content: '·'; color: var(--gold);
+  flex-shrink: 0; margin-top: 0;
 }
 
-/* 史籍辨伪区 */
-.evidence-section{
-  background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-  position:relative;z-index:1;
-}
-.evidence-inner{max-width:1200px;margin:0 auto;padding:64px 48px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-.ev-left .sec-label{font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
-.ev-title{font-family:'Noto Serif SC',serif;font-weight:900;font-size:clamp(1.5rem,3vw,2.2rem);color:var(--text);margin-bottom:16px;line-height:1.3}
-.ev-body{font-size:0.88rem;color:var(--text2);line-height:1.95;margin-bottom:28px}
-.ev-quote{border-left:3px solid var(--gold);padding:16px 0 16px 20px;margin-bottom:16px}
-.ev-quote-tag{font-size:0.62rem;letter-spacing:0.3em;color:var(--red);margin-bottom:10px;text-transform:uppercase}
-.ev-quote-text{font-family:'Noto Serif SC',serif;font-size:1rem;font-weight:300;color:var(--text);line-height:2;margin-bottom:8px}
-.ev-quote-src{font-size:0.68rem;color:var(--text3);letter-spacing:0.1em}
-.ev-verdict{background:var(--bg3);border:1px solid var(--border2);padding:28px}
-.ev-verdict-tag{font-size:0.62rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
-.ev-badge{display:inline-block;font-size:0.68rem;letter-spacing:0.12em;padding:4px 12px;border:1px solid rgba(196,154,26,0.3);color:var(--gold);margin-bottom:14px}
-.ev-points{display:flex;flex-direction:column;gap:10px}
-.ev-point{display:flex;gap:10px;align-items:flex-start}
-.ev-n{font-size:0.65rem;color:var(--gold);flex-shrink:0;margin-top:3px;font-family:'Cinzel',serif}
-.ev-t{font-size:0.82rem;color:var(--text2);line-height:1.8}
+/* 编号列表 */
+.num-list { display: flex; flex-direction: column; gap: 12px; }
+.num-item { display: flex; gap: 12px; align-items: flex-start; }
+.num { font-size: 0.7rem; color: var(--gold); flex-shrink: 0; margin-top: 3px; font-family: 'Cinzel', serif; }
+.num-text { font-size: 0.85rem; color: var(--text2); line-height: 1.8; }
 
-/* 走陵结伴区 */
-.partner-section{max-width:1200px;margin:0 auto;padding:64px 48px;position:relative;z-index:1}
-.partner-header{margin-bottom:36px}
-.partner-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
-.partner-card{
-  background:var(--bg2);padding:24px 28px;
-  transition:background 0.2s;cursor:pointer;
+/* 史料引用 */
+.quote-block {
+  border-left: 3px solid var(--gold);
+  padding: 16px 20px;
+  background: var(--golddim);
+  margin-bottom: 16px;
 }
-.partner-card:hover{background:var(--bg3)}
-.pc-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;gap:12px}
-.pc-title{font-size:0.95rem;font-weight:500;color:var(--text);letter-spacing:0.04em;line-height:1.4}
-.pc-slots{font-size:0.68rem;padding:4px 12px;border:1px solid var(--border2);color:var(--gold);white-space:nowrap;flex-shrink:0}
-.pc-meta{font-size:0.78rem;color:var(--text2);line-height:1.75;margin-bottom:12px}
-.pc-tags{display:flex;gap:6px;flex-wrap:wrap}
-.pctag{font-size:0.6rem;padding:2px 8px;border:1px solid var(--border);color:var(--text3)}
-
-/* 页脚 */
-footer{
-  border-top:1px solid var(--border);
-  padding:32px 48px;position:relative;z-index:1;
-  display:flex;align-items:center;justify-content:space-between;
+.quote-text {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1rem; font-weight: 400;
+  color: var(--text); line-height: 2; margin-bottom: 8px;
 }
-.footer-logo{font-family:'Noto Serif SC',serif;font-weight:900;font-size:1rem;color:var(--text3);letter-spacing:0.22em}
-.footer-copy{font-size:0.65rem;letter-spacing:0.1em;color:var(--text3)}
+.quote-src { font-size: 0.72rem; color: var(--text3); letter-spacing: 0.1em; }
 
-/* 动画 */
-@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.7s ease,transform 0.7s ease}
-.reveal.in{opacity:1;transform:none}
-
-/* 响应式 */
-@media(max-width:1024px){
-  nav{padding:0 24px}
-  .tombs-section,.featured-section,.partner-section{padding-left:24px;padding-right:24px}
-  .filter-bar{padding:0 24px}
-  .tomb-list-head,.tomb-row{grid-template-columns:2fr 0.8fr 1fr 1fr 1.3fr}
-  .tomb-row .td:nth-child(6),.tomb-row .td:nth-child(7),
-  .tomb-list-head .th:nth-child(6),.tomb-list-head .th:nth-child(7){display:none}
-  .evidence-inner{grid-template-columns:1fr;gap:40px}
-  footer{padding:24px}
+/* 可信度标签 */
+.credibility {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.68rem; letter-spacing: 0.15em;
+  padding: 4px 12px; margin-bottom: 14px;
+  border: 1px solid;
 }
-@media(max-width:700px){
-  .nav-links,.nav-cta{display:none}
-  .hstat{padding:16px 20px}
-  .feat-grid{grid-template-columns:1fr}
-  .feat-card.big{grid-row:auto;min-height:220px}
-  .partner-grid{grid-template-columns:1fr}
-  .tomb-list-head,.tomb-row{grid-template-columns:2fr 0.8fr 1fr}
-  .tomb-row .td:nth-child(4),.tomb-row .td:nth-child(5),
-  .tomb-list-head .th:nth-child(4),.tomb-list-head .th:nth-child(5){display:none}
+.cred-doubt { border-color: rgba(196,154,26,0.3); color: var(--gold); }
+.cred-trust { border-color: rgba(42,158,110,0.4); color: var(--green2); }
+
+/* ── 侧边栏 ── */
+.sidebar-block {
+  padding: 32px 28px;
+  border-bottom: 1px solid var(--border);
+}
+.sb-title {
+  font-size: 0.65rem; letter-spacing: 0.35em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 18px;
+}
+.info-row {
+  display: flex; gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.83rem;
+}
+.info-row:last-child { border-bottom: none; }
+.info-key { color: var(--text3); width: 72px; flex-shrink: 0; }
+.info-val { color: var(--text); flex: 1; line-height: 1.5; }
+.info-val.g { color: var(--green2); }
+.info-val.a { color: var(--amber2); }
+
+.rating-stars { color: var(--gold); font-size: 1rem; letter-spacing: 3px; }
+
+.sb-cta {
+  margin-top: 20px; display: flex; flex-direction: column; gap: 8px;
+}
+.cta-btn {
+  display: block; text-align: center;
+  font-size: 0.78rem; letter-spacing: 0.15em;
+  padding: 11px 20px; text-decoration: none;
+  font-family: 'Noto Sans SC', sans-serif;
+  cursor: pointer; border: 1px solid; transition: all 0.2s;
+}
+.cta-primary {
+  background: var(--gold); color: var(--bg);
+  border-color: var(--gold); font-weight: 500;
+}
+.cta-primary:hover { background: var(--gold2); border-color: var(--gold2); }
+.cta-secondary {
+  background: transparent; color: var(--text2);
+  border-color: var(--border2);
+}
+.cta-secondary:hover { color: var(--gold); border-color: var(--gold); }
+
+/* 附近陵墓 */
+.nearby-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 0; border-bottom: 1px solid var(--border);
+  cursor: pointer; transition: opacity 0.2s;
+}
+.nearby-item:last-child { border-bottom: none; }
+.nearby-item:hover { opacity: 0.7; }
+.nearby-dot {
+  width: 8px; height: 8px;
+  border: 1px solid var(--gold); flex-shrink: 0;
+}
+.nearby-name { font-size: 0.85rem; color: var(--text); flex: 1; }
+.nearby-dist { font-size: 0.7rem; color: var(--text3); }
+
+/* 用户评论 */
+.comment {
+  padding: 16px 0; border-bottom: 1px solid var(--border);
+}
+.comment:last-child { border-bottom: none; }
+.comment-head {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+}
+.comment-avatar {
+  width: 28px; height: 28px;
+  background: var(--bg4); border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; color: var(--gold); flex-shrink: 0;
+}
+.comment-name { font-size: 0.82rem; color: var(--text); }
+.comment-date { font-size: 0.68rem; color: var(--text3); margin-left: auto; }
+.comment-text { font-size: 0.82rem; color: var(--text2); line-height: 1.8; }
+
+/* ── 底部推荐 ── */
+.more-section {
+  padding: 56px;
+  max-width: 1200px; margin: 0 auto;
+}
+.more-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1rem; font-weight: 600;
+  color: var(--text2); letter-spacing: 0.08em;
+  margin-bottom: 28px;
+}
+.more-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border);
+}
+.more-card {
+  background: var(--bg2); padding: 24px;
+  cursor: pointer; transition: background 0.2s;
+  text-decoration: none; display: block;
+}
+.more-card:hover { background: var(--bg3); }
+.more-era { font-size: 0.65rem; letter-spacing: 0.25em; color: var(--text3); margin-bottom: 8px; }
+.more-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.05rem; font-weight: 600;
+  color: var(--text); margin-bottom: 6px;
+}
+.more-owner { font-size: 0.78rem; color: var(--text3); margin-bottom: 12px; }
+.more-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.mtag {
+  font-size: 0.6rem; padding: 2px 8px;
+  border: 1px solid var(--border2); color: var(--text3);
+}
+.mtag.o { border-color: rgba(42,158,110,0.35); color: var(--green2); }
+
+/* ── 页脚 ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 56px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-logo {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 900; font-size: 1rem;
+  color: var(--text3); letter-spacing: 0.2em;
+}
+.footer-copy { font-size: 0.68rem; color: var(--text3); letter-spacing: 0.08em; }
+
+/* ── 入场动画 ── */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ── 响应式 ── */
+@media (max-width: 960px) {
+  .main { grid-template-columns: 1fr; }
+  .content { border-right: none; }
+  .sidebar { position: static; border-top: 1px solid var(--border); }
+  .block { padding: 36px 24px; }
+  .hero-content { padding: 0 24px 40px; }
+  nav { padding: 0 20px; }
+  .more-section { padding: 36px 24px; }
+  .more-grid { grid-template-columns: 1fr 1fr; }
+  footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+}
+@media (max-width: 600px) {
+  .more-grid { grid-template-columns: 1fr; }
+  .nav-actions { display: none; }
+  .quickbar { flex-wrap: wrap; }
+  .qitem { min-width: 50%; }
 }
 </style>
 </head>
 <body>
+
+<!-- 导航 -->
 <nav>
-<a class="nav-logo" href="index.html">走陵</a>
-<ul class="nav-links">
-<li><a href="#tombs">陵墓</a></li>
-<li><a href="#evidence">史籍辨伪</a></li>
-<li><a href="#partner">找搭子</a></li>
-</ul>
-<a class="nav-cta" href="#partner">找走陵搭子</a>
+  <a href="#" class="nav-back">
+    <span class="nav-back-arrow">←</span>
+    走陵数据库
+  </a>
+  <div class="nav-title">走 陵</div>
+  <div class="nav-actions">
+    <a href="#partner" class="nav-btn">找搭子</a>
+    <a href="#" class="nav-btn">分享</a>
+  </div>
 </nav>
+
 <!-- 英雄 -->
 <div class="hero">
-<canvas class="hero-canvas" id="heroCanvas"></canvas>
-<div class="hero-content">
-<p class="hero-kicker">China's Ancient Tomb Culture Platform · 走陵</p>
-<h1 class="hero-zh">走 陵</h1>
-<p class="hero-en">ZOULING · IMPERIAL TOMBS OF CHINA</p>
-<div class="hero-rule"></div>
-<p class="hero-tagline">帝王终将沉睡<br/>但文明仍在地下呼吸</p>
-<div class="hero-stats">
-<div class="hstat"><span class="hstat-n">13</span><span class="hstat-l">收录陵墓</span></div>
-<div class="hstat"><span class="hstat-n">5</span><span class="hstat-l">历史朝代</span></div>
-<div class="hstat"><span class="hstat-n">6</span><span class="hstat-l">地宫已开放</span></div>
-<div class="hstat"><span class="hstat-n">8</span><span class="hstat-l">功能模块</span></div>
-</div>
-</div>
-<div class="hero-scroll"></div>
-</div>
-<!-- 筛选栏 -->
-<div class="filter-bar">
-<button class="filter-btn active" onclick="filterTombs('all',this)">全部陵墓</button>
-<button class="filter-btn" onclick="filterTombs('秦',this)">秦</button>
-<button class="filter-btn" onclick="filterTombs('汉',this)">汉</button>
-<button class="filter-btn" onclick="filterTombs('唐',this)">唐</button>
-<button class="filter-btn" onclick="filterTombs('明',this)">明</button>
-<button class="filter-btn" onclick="filterTombs('open',this)">地宫开放</button>
-<div class="filter-search">
-<span class="search-icon">⌕</span>
-<input oninput="searchTombs(this.value)" placeholder="搜索陵墓或墓主人…" type="text"/>
-</div>
-</div>
-<!-- 陵墓列表 -->
-<section class="tombs-section reveal" id="tombs">
-<div class="tombs-header">
-<div>
-<p class="tombs-label">陵墓数据库</p>
-<h2 class="tombs-title">走陵人视角，才是真实参观价值</h2>
-</div>
-<p class="tombs-count" id="tombCount">共 13 座陵墓</p>
-</div>
-<div class="tomb-list-head">
-<span class="th">陵墓</span>
-<span class="th">朝代</span>
-<span class="th">墓主人</span>
-<span class="th">等级</span>
-<span class="th">城市</span>
-<span class="th">开放状态</span>
-<span class="th">推荐 / 阴间</span>
-</div>
-<div class="tomb-list" id="tombList">
-  <div style="padding:32px;color:var(--text2);font-size:0.85rem;letter-spacing:0.1em;">
-    正在加载陵墓数据……
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <!-- 封土轮廓 -->
+  <div class="hero-mound">
+    <svg viewBox="0 0 1440 400" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="moundGlow" cx="50%" cy="0%" r="50%">
+          <stop offset="0%" stop-color="rgba(196,154,26,0.25)"/>
+          <stop offset="100%" stop-color="rgba(196,154,26,0)"/>
+        </radialGradient>
+        <linearGradient id="moundFill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1a1200"/>
+          <stop offset="100%" stop-color="#0a0800"/>
+        </linearGradient>
+      </defs>
+      <!-- 远山 -->
+      <path d="M0,320 Q200,240 400,260 Q600,240 720,200 Q840,160 1000,220 Q1200,240 1440,280 L1440,400 L0,400 Z" fill="rgba(20,15,0,0.4)"/>
+      <!-- 封土主体 -->
+      <path d="M480,280 Q580,120 720,80 Q860,120 960,280 Q900,300 720,310 Q540,300 480,280 Z" fill="url(#moundFill)"/>
+      <!-- 封土光晕 -->
+      <ellipse cx="720" cy="120" rx="180" ry="80" fill="url(#moundGlow)" opacity="0.6"/>
+      <!-- 地面 -->
+      <path d="M0,320 Q360,300 720,310 Q1080,300 1440,320 L1440,400 L0,400 Z" fill="#0a0800"/>
+      <!-- 轮廓线 -->
+      <path d="M480,280 Q580,120 720,80 Q860,120 960,280" fill="none" stroke="rgba(196,154,26,0.15)" stroke-width="1"/>
+    </svg>
+  </div>
+  <!-- 粒子 -->
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-content">
+    <p class="hero-dynasty">Qin Dynasty · 前221—前210 BCE · 帝陵</p>
+    <h1 class="hero-title">秦始皇帝陵</h1>
+    <p class="hero-en">MAUSOLEUM OF THE FIRST QIN EMPEROR</p>
+    <p class="hero-tagline"><em>你走过它，才真正理解「皇帝」二字的重量。</em></p>
+    <div class="hero-badges">
+      <span class="hbadge hbadge-gold">帝陵</span>
+      <span class="hbadge hbadge-gold">未发掘</span>
+      <span class="hbadge hbadge-gray">地宫封闭</span>
+      <span class="hbadge hbadge-green">地面区域开放</span>
+    </div>
   </div>
 </div>
-</section>
-<!-- 特色推荐 -->
-<section class="featured-section reveal">
-<p class="feat-label">编辑精选</p>
-<div class="feat-grid">
-<a class="feat-card big" href="qin-mausoleum.html">
-<div class="feat-bg-char">秦</div>
-<p class="feat-era">秦朝 · 前210年 · 帝陵</p>
-<h3 class="feat-name">秦始皇帝陵</h3>
-<p class="feat-owner">嬴政 · 中国第一位皇帝</p>
-<div class="feat-tags">
-<span class="ftag">未发掘</span>
-<span class="ftag">地面开放</span>
-<span class="ftag">世界第八奇迹</span>
-</div>
-<div class="feat-highlight">你走过它，才真正理解「皇帝」二字的重量。</div>
-</a>
-<a class="feat-card" href="#">
-<div class="feat-bg-char">唐</div>
-<p class="feat-era">唐朝 · 683年 · 帝陵</p>
-<h3 class="feat-name">唐乾陵</h3>
-<p class="feat-owner">唐高宗 · 武则天</p>
-<div class="feat-tags">
-<span class="ftag">未发掘</span>
-<span class="ftag o">陵园开放</span>
-<span class="ftag">无字碑</span>
-</div>
-</a>
-<a class="feat-card" href="#">
-<div class="feat-bg-char">汉</div>
-<p class="feat-era">西汉 · 前188年 · 帝陵</p>
-<h3 class="feat-name">汉阳陵</h3>
-<p class="feat-owner">汉景帝 刘启</p>
-<div class="feat-tags">
-<span class="ftag o">地宫开放</span>
-<span class="ftag">透明地板</span>
-<span class="ftag">裸陶俑</span>
-</div>
-</a>
-<a class="feat-card" href="#">
-<div class="feat-bg-char">唐</div>
-<p class="feat-era">唐朝 · 649年 · 帝陵</p>
-<h3 class="feat-name">唐昭陵</h3>
-<p class="feat-owner">唐太宗 李世民</p>
-<div class="feat-tags">
-<span class="ftag">九嵕山</span>
-<span class="ftag o">部分开放</span>
-<span class="ftag">昭陵六骏</span>
-</div>
-</a>
-</div>
-</section>
-<!-- 史籍辨伪 -->
-<section class="evidence-section" id="evidence">
-<div class="evidence-inner reveal">
-<div class="ev-left">
-<p class="sec-label">史籍辨伪</p>
-<h2 class="ev-title">在文献和遗址之间<br/>寻找更真实的古代中国</h2>
-<p class="ev-body">部分古籍因政治目的与文学夸饰而失真。平台以考古报告为第一手资料，对每一条史料记载给出可信度评定，打破两千年的历史误解。</p>
-<div class="ev-quote">
-<p class="ev-quote-tag">史籍记载 · 存疑</p>
-<p class="ev-quote-text">「以人鱼膏为烛，度不灭者久之。」</p>
-<p class="ev-quote-src">——《史记·秦始皇本纪》· 司马迁 · 西汉</p>
-</div>
-</div>
-<div class="ev-verdict">
-<p class="ev-verdict-tag">考古实证评定</p>
-<div class="ev-badge">存疑 · 考古无直接支撑</div>
-<div class="ev-points">
-<div class="ev-point"><span class="ev-n">①</span><p class="ev-t">地宫空间密闭，氧气严重不足，无法支持长期燃烧，物理上不成立。</p></div>
-<div class="ev-point"><span class="ev-n">②</span><p class="ev-t">「人鱼膏」学界主流考证为鲸鱼油脂，常温下数日即耗尽，「千年不灭」不符合燃烧原理。</p></div>
-<div class="ev-point"><span class="ev-n">③</span><p class="ev-t">司马迁写《史记》有以秦谏汉武帝的政治目的，夸大奢靡是叙事策略，非纯粹记史。</p></div>
-</div>
-</div>
-</div>
-</section>
-<!-- 走陵结伴 -->
-<section class="partner-section reveal" id="partner">
-<div class="partner-header">
-<p class="feat-label">走陵结伴</p>
-<h2 class="tombs-title">按陵墓匹配，找到真正同频的搭子</h2>
-</div>
-<div class="partner-grid">
-<div class="partner-card">
-<div class="pc-head">
-<p class="pc-title">关中帝陵两日走 · 秦陵+汉陵</p>
-<span class="pc-slots">2 / 4 人</span>
-</div>
-<p class="pc-meta">发起人：老陕西走陵 · 12月28日 · 自驾 · 欢迎有汉唐历史兴趣者</p>
-<div class="pc-tags"><span class="pctag">西安</span><span class="pctag">帝陵</span><span class="pctag">自驾</span><span class="pctag">两日</span></div>
-</div>
-<div class="partner-card">
-<div class="pc-head">
-<p class="pc-title">唐乾陵专项走陵 · 无字碑下的沉默</p>
-<span class="pc-slots">1 / 3 人</span>
-</div>
-<p class="pc-meta">发起人：武周研究者 · 元旦假期 · 步行深度游 · 需了解唐史背景</p>
-<div class="pc-tags"><span class="pctag">咸阳</span><span class="pctag">唐代</span><span class="pctag">帝陵</span><span class="pctag">深度游</span></div>
-</div>
-<div class="partner-card">
-<div class="pc-head">
-<p class="pc-title">汉阳陵地宫探访 · 透明地板下的秘密</p>
-<span class="pc-slots">3 / 6 人</span>
-</div>
-<p class="pc-meta">发起人：汉史爱好者 · 周末 · 地铁可达 · 适合初次走陵</p>
-<div class="pc-tags"><span class="pctag">西安</span><span class="pctag">西汉</span><span class="pctag">地宫</span><span class="pctag">入门</span></div>
-</div>
-<div class="partner-card">
-<div class="pc-head">
-<p class="pc-title">济南汉墓一日走 · 冷门但精彩</p>
-<span class="pc-slots">2 / 4 人</span>
-</div>
-<p class="pc-meta">发起人：山东陵猎人 · 待定 · 汉济北王墓+三官庙汉墓</p>
-<div class="pc-tags"><span class="pctag">济南</span><span class="pctag">西汉</span><span class="pctag">小众</span><span class="pctag">免费</span></div>
-</div>
-</div>
-</section>
-<footer>
-<div class="footer-logo">走 陵</div>
-<p class="footer-copy">以考古实证，还原曾经真实存在的那个世界 · 2026</p>
-</footer>
-<script>
-// ── Canvas 背景动画（原有，不动）──────────────────
-const canvas = document.getElementById('heroCanvas');
-const ctx = canvas.getContext('2d');
-let W, H, particles = [];
 
-function resize() {
-  W = canvas.width = canvas.offsetWidth;
-  H = canvas.height = canvas.offsetHeight;
-}
+<!-- 快速信息栏 -->
+<div class="quickbar">
+  <div class="qitem"><span class="qkey">地点</span><span class="qval">陕西西安临潼</span></div>
+  <div class="qitem"><span class="qkey">参考票价</span><span class="qval">联票 120 元</span></div>
+  <div class="qitem"><span class="qkey">开放时间</span><span class="qval">08:30 – 18:00</span></div>
+  <div class="qitem"><span class="qkey">地宫</span><span class="qval warn">未开放</span></div>
+  <div class="qitem"><span class="qkey">推荐指数</span><span class="qval"><span style="color:var(--gold)">★★★★★</span></span></div>
+  <div class="qitem"><span class="qkey">适合人群</span><span class="qval">所有走陵爱好者</span></div>
+</div>
 
-function initParticles() {
-  particles = [];
-  for (let i = 0; i < 60; i++) {
-    particles.push({
-      x: Math.random() * W,
-      y: Math.random() * H,
-      r: Math.random() * 1.2 + 0.2,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: -Math.random() * 0.5 - 0.1,
-      o: Math.random() * 0.5 + 0.1
-    });
-  }
-}
+<!-- 主体 -->
+<div class="main">
+  <div class="content">
 
-function drawFrame() {
-  ctx.clearRect(0, 0, W, H);
-  const grd = ctx.createRadialGradient(W/2, H*0.55, 0, W/2, H*0.55, W*0.35);
-  grd.addColorStop(0, 'rgba(196,154,26,0.12)');
-  grd.addColorStop(1, 'rgba(196,154,26,0)');
-  ctx.fillStyle = grd;
-  ctx.beginPath();
-  ctx.ellipse(W/2, H*0.62, W*0.28, H*0.22, 0, 0, Math.PI*2);
-  ctx.fill();
-  ctx.strokeStyle = 'rgba(196,154,26,0.08)';
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.moveTo(W*0.25, H*0.75);
-  ctx.quadraticCurveTo(W*0.5, H*0.35, W*0.75, H*0.75);
-  ctx.stroke();
-  particles.forEach(p => {
-    p.x += p.vx; p.y += p.vy;
-    if (p.y < -5) { p.y = H + 5; p.x = Math.random() * W; }
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-    ctx.fillStyle = `rgba(196,154,26,${p.o})`;
-    ctx.fill();
-  });
-  requestAnimationFrame(drawFrame);
-}
+    
+    <!-- 结构特点 / 亮点 / 走陵体验 -->
+    <div class="block reveal">
+      <div class="block-label">陵墓印象</div>
 
-window.addEventListener('resize', () => { resize(); initParticles(); });
-resize(); initParticles(); drawFrame();
+      <div class="review-cards">
+        <div class="rcard rcard-blue">
+          <div class="rcard-icon">◈</div>
+          <div class="rcard-content">
+            <p class="rcard-title">结构特点</p>
+            <p class="rcard-text">封土堆高大，地下地宫纵深极大，庞大外藏系统，仿照都城格局修建。</p>
+          </div>
+        </div>
 
-// ── 入场动画（原有，不动）─────────────────────────
-const io = new IntersectionObserver(
-  entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
-  { threshold: 0.06 }
-);
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+        <div class="rcard rcard-green">
+          <div class="rcard-icon">✦</div>
+          <div class="rcard-content">
+            <p class="rcard-title">亮点</p>
+            <p class="rcard-text">兵马俑、铜车马、世界规模最大帝王陵、世界第八大奇迹。</p>
+          </div>
+        </div>
 
-// ── 数据驱动渲染 ──────────────────────────────────
-
-// 朝代 → CSS class
-const DYNASTY_CLASS = {
-  '秦': 'dy-qin',
-  '汉': 'dy-han', '西汉': 'dy-han', '东汉': 'dy-han',
-  '唐': 'dy-tang',
-  '明': 'dy-ming'
-};
-
-// 开放状态 key → CSS class 和显示文字
-const OPEN_CLASS = { 'open': 'open-y', 'part': 'open-part', 'none': 'open-n' };
-const OPEN_LABEL = { 'open': '地宫开放', 'part': '部分开放', 'none': '未开放' };
-
-// 等级 → CSS class
-const GRADE_CLASS = {
-  '帝陵':  'lv-emp',
-  '王陵':  'lv-prince',
-  '陪葬墓': 'lv-side',
-  '贵族墓': 'lv-noble',
-  '平民墓': 'lv-common',
-  '无名墓': 'lv-unknown'
-};
-
-function makeStars(score, goldClass) {
-  const s = score || 0;
-  return `<span class="${goldClass}">${'★'.repeat(s)}${'☆'.repeat(5 - s)}</span>`;
-}
-
-function renderTombRows(tombs) {
-  const list = document.getElementById('tombList');
-  const countEl = document.getElementById('tombCount');
-
-  if (!tombs.length) {
-    list.innerHTML = '<div style="padding:32px;color:var(--text2);font-size:0.85rem;">没有符合条件的陵墓</div>';
-    if (countEl) countEl.textContent = '共 0 座陵墓';
-    return;
-  }
-
-  list.innerHTML = tombs.map(t => {
-    const dClass  = DYNASTY_CLASS[t.dynasty] || 'dy-other';
-    const oClass  = OPEN_CLASS[t.open_status_key] || 'open-n';
-    const oLabel  = OPEN_LABEL[t.open_status_key] || t.open_status || '未知';
-    const gClass  = GRADE_CLASS[t.burial_grade]   || '';
-    const nameShort = t.tomb_owner_short || t.tomb_owner || '—';
-    const href    = t.detail_url || '#';
-
-    return `<a class="tomb-row"
-         data-dynasty="${t.dynasty}"
-         data-open="${t.open_status_key || 'none'}"
-         href="${href}">
-  <div class="td td-name">
-    <span class="tomb-name-text">${t.tomb_name}</span>
-    <span class="tomb-owner-text">${nameShort} · ${t.year || ''}</span>
-  </div>
-  <div class="td td-dynasty"><span class="${dClass}">${t.dynasty}</span></div>
-  <div class="td" style="font-size:0.83rem;color:var(--text2)">${t.tomb_owner || '—'}</div>
-  <div class="td td-level"><span class="${gClass}">${t.burial_grade || '—'}</span></div>
-  <div class="td" style="font-size:0.83rem;color:var(--text2)">${t.location?.city || '—'}</div>
-  <div class="td"><span class="${oClass}">${oLabel}</span></div>
-  <div class="td">
-    <div class="dual-rating">
-      <div class="rating-line">
-        <span class="rating-label">推荐</span>
-        ${makeStars(t.visit_score, 'stars-gold')}
+        <div class="rcard rcard-amber">
+          <div class="rcard-icon">⚑</div>
+          <div class="rcard-content">
+            <p class="rcard-title">走陵体验</p>
+            <p class="rcard-text">震撼磅礴，历史厚重感极强。</p>
+          </div>
+        </div>
       </div>
-      <div class="rating-line">
-        <span class="rating-label">阴间</span>
-        ${makeStars(t.mystery_score, 'stars-blue')}
+    </div>
+
+
+    <!-- 走陵人点评 -->
+    <div class="block reveal">
+      <div class="block-label">走陵人点评</div>
+      <div class="review-cards">
+        <div class="rcard rcard-green">
+          <div class="rcard-icon">✦</div>
+          <div class="rcard-content">
+            <p class="rcard-title">最值得看</p>
+            <p class="rcard-text">封土本体的尺度震撼、铜车马的精细程度、陵园遗址的空旷感。站在封土前，哪怕什么都不知道，也能感受到这不是普通人的墓。</p>
+          </div>
+        </div>
+        <div class="rcard rcard-amber">
+          <div class="rcard-icon">⚑</div>
+          <div class="rcard-content">
+            <p class="rcard-title">避坑提示</p>
+            <p class="rcard-text">秦陵本体和兵马俑不在同一个位置，相距约 1.5 公里，需要单独移动。旺季人极多，建议工作日早到。不要只去兵马俑就离开，封土和铜车马馆才是真正容易被忽略的亮点。</p>
+          </div>
+        </div>
+        <div class="rcard rcard-blue">
+          <div class="rcard-icon">◈</div>
+          <div class="rcard-content">
+            <p class="rcard-title">走陵建议</p>
+            <p class="rcard-text">建议整天行程，上午兵马俑，下午秦陵封土 + 铜车马馆。傍晚光线好，封土的轮廓最有历史感。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 墓主生平 -->
+    <div class="block reveal">
+      <div class="block-label">墓主生平</div>
+      <p class="block-p">嬴政（前259—前210年），秦庄襄王之子，13岁即位为秦王，39岁完成统一六国，建立中国历史上第一个统一的中央集权国家，自称「始皇帝」。</p>
+      <p class="block-p">在位期间推行郡县制、统一文字度量衡、修驰道、筑长城、建骊山陵，影响中国此后两千年的政治格局。前210年于东巡途中病逝于沙丘，享年49岁。</p>
+      <div class="toggle" onclick="this.classList.toggle('open')">
+        <div class="toggle-head">
+          <span class="toggle-arrow">▶</span>
+          死亡原因考证
+        </div>
+        <div class="toggle-body">
+          <p class="toggle-p"><strong style="color:var(--text)">史籍记载：</strong>《史记》称其病死于东巡途中，赵高、李斯秘不发丧，以咸鱼遮盖气味运回咸阳。</p>
+          <p class="toggle-p"><strong style="color:var(--text)">考古推断：</strong>秦始皇长期服用含汞丹药，慢性汞中毒可能加速了死亡。秦陵地宫探测显示封土土壤汞含量异常高，与史书记载的「以水银为百川江河大海」相互印证。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 考古档案 -->
+    <div class="block reveal">
+      <div class="block-label">考古档案</div>
+      <p class="block-p">1974年，临潼西杨村农民打井时意外挖出陶俑碎片，考古队随即介入，发现兵马俑坑群。秦陵本体早已见于史书记载，考古工作以地面勘探为主，地宫至今未正式发掘。</p>
+      <p class="block-p">封土底部东西宽约 485 米、南北长约 515 米，现存高约 51 米，原始高度估计超过 115 米。陵园面积约 56 平方公里，有内外两重夯土城墙，已发现陪葬坑逾 600 处。</p>
+      <div style="display:flex; flex-direction:column; gap:8px; margin-top:4px;">
+        <div class="toggle" onclick="this.classList.toggle('open')">
+          <div class="toggle-head"><span class="toggle-arrow">▶</span>主要出土文物</div>
+          <div class="toggle-body">
+            <ul class="dot-list">
+              <li>铜车马（一号、二号），现藏秦始皇帝陵博物院，工艺精密程度被誉为「青铜之冠」</li>
+              <li>兵马俑约 8000 件（仍在发掘中），三个坑风格各异</li>
+              <li>百戏俑（2011年新发现）、文官俑（跪坐姿态）</li>
+              <li>大量铜鼎、铁器、骨器，地宫内容至今未知</li>
+            </ul>
+          </div>
+        </div>
+        <div class="toggle" onclick="this.classList.toggle('open')">
+          <div class="toggle-head"><span class="toggle-arrow">▶</span>形制与礼制</div>
+          <div class="toggle-body">
+            <p class="toggle-p">坐西向东（与多数陵墓不同），学界认为与秦人源于西方、面向东方六国征服方向有关。</p>
+            <p class="toggle-p">陵园内外两重城墙、多组陪葬坑的布局，确立了此后中国帝陵营建的基本范式，汉代帝陵在形制上多有沿袭。</p>
+          </div>
+        </div>
+        <div class="toggle" onclick="this.classList.toggle('open')">
+          <div class="toggle-head"><span class="toggle-arrow">▶</span>尚存争议</div>
+          <div class="toggle-body">
+            <ul class="dot-list">
+              <li>地宫内部结构：目前依赖遥感和物探推断，尚未直接发掘验证</li>
+              <li>陵园总体布局：外城以外仍有大量区域未经系统勘探</li>
+              <li>坐西向东的具体原因：礼制说、政治说、风水说并存，无定论</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 史籍辨伪 -->
+    <div class="block reveal">
+      <div class="block-label">史籍辨伪</div>
+      <p class="block-p" style="margin-bottom:24px;">以下内容以考古实证为依据，对古籍记载进行可信度评定。古籍因政治目的与文学夸饰而失真，考古是最后的裁判。</p>
+
+      <div style="margin-bottom: 20px;">
+        <div class="quote-block">
+          <p class="quote-text">「以人鱼膏为烛，度不灭者久之。」</p>
+          <p class="quote-src">——《史记·秦始皇本纪》· 司马迁 · 西汉</p>
+        </div>
+        <div class="credibility cred-doubt">存疑 · 考古无直接支撑</div>
+        <div class="num-list">
+          <div class="num-item"><span class="num">①</span><p class="num-text">地宫空间密闭，氧气严重不足，无法支持长期燃烧，物理上不成立。</p></div>
+          <div class="num-item"><span class="num">②</span><p class="num-text">「人鱼膏」学界主流考证为鲸鱼油脂，常温下数日即耗尽，「千年不灭」不符合燃烧原理。</p></div>
+          <div class="num-item"><span class="num">③</span><p class="num-text">司马迁写《史记》有以秦谏汉武帝的政治目的，夸大秦皇奢靡是叙事策略，非纯粹记史。</p></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="quote-block">
+          <p class="quote-text">「以水银为百川江河大海，机相灌输。」</p>
+          <p class="quote-src">——《史记·秦始皇本纪》· 司马迁 · 西汉</p>
+        </div>
+        <div class="credibility cred-trust">基本可信 · 有考古物证支撑</div>
+        <p class="block-p">考古探测显示，封土土壤汞含量显著高于周边区域，分布形态呈现出江河走向特征，与史书记载吻合度较高，是目前少数获得物理证据支持的史料之一。</p>
+      </div>
+    </div>
+
+    <!-- 找搭子 -->
+    <div class="block reveal" id="partner">
+      <div class="block-label">走陵结伴</div>
+      <p class="block-p" style="margin-bottom:24px;">找到同样想去秦始皇陵的人，一起走陵比一个人去更有意思。</p>
+      <div style="display:flex; flex-direction:column; gap:1px; background:var(--border); border:1px solid var(--border); margin-bottom:16px;">
+        <div style="background:var(--bg2); padding:18px 20px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+            <p style="font-size:0.92rem; font-weight:500; color:var(--text);">关中帝陵两日走 · 秦陵+汉陵</p>
+            <span style="font-size:0.7rem; padding:3px 10px; border:1px solid var(--border2); color:var(--gold);">2 / 4 人</span>
+          </div>
+          <p style="font-size:0.8rem; color:var(--text2); margin-bottom:10px;">发起人：老陕西走陵 · 12月28日 · 自驾 · 欢迎有汉唐历史兴趣者</p>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <span style="font-size:0.62rem; padding:2px 8px; border:1px solid var(--border2); color:var(--text3);">西安</span>
+            <span style="font-size:0.62rem; padding:2px 8px; border:1px solid var(--border2); color:var(--text3);">帝陵</span>
+            <span style="font-size:0.62rem; padding:2px 8px; border:1px solid var(--border2); color:var(--text3);">自驾</span>
+            <span style="font-size:0.62rem; padding:2px 8px; border:1px solid var(--border2); color:var(--text3);">两日</span>
+          </div>
+        </div>
+        <div style="background:var(--bg2); padding:18px 20px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+            <p style="font-size:0.92rem; font-weight:500; color:var(--text);">元旦秦陵专项走陵</p>
+            <span style="font-size:0.7rem; padding:3px 10px; border:1px solid var(--border2); color:var(--gold);">1 / 3 人</span>
+          </div>
+          <p style="font-size:0.8rem; color:var(--text2); margin-bottom:10px;">发起人：兵马俑研究者 · 1月1日 · 步行深度游 · 需要了解秦史背景</p>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <span style="font-size:0.62rem; padding:2px 8px; border:1px solid var(--border2); color:var(--text3);">西安</span>
+            <span style="font-size:0.62rem; padding:2px 8px; border:1px solid var(--border2); color:var(--text3);">秦朝</span>
+            <span style="font-size:0.62rem; padding:2px 8px; border:1px solid var(--border2); color:var(--text3);">深度游</span>
+          </div>
+        </div>
+      </div>
+      <button class="cta-btn cta-secondary" style="display:block; text-align:center;">发起新活动</button>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- 侧边栏 -->
+  <div class="sidebar">
+    <div class="sidebar-block">
+      <p class="sb-title">基本信息</p>
+      <div class="info-row"><span class="info-key">朝代</span><span class="info-val">秦朝</span></div>
+      <div class="info-row"><span class="info-key">墓主人</span><span class="info-val">嬴政（秦始皇帝）</span></div>
+      <div class="info-row"><span class="info-key">年代</span><span class="info-val">前210年</span></div>
+      <div class="info-row"><span class="info-key">等级</span><span class="info-val">帝陵</span></div>
+      <div class="info-row"><span class="info-key">地点</span><span class="info-val">陕西西安临潼</span></div>
+      <div class="info-row"><span class="info-key">票价</span><span class="info-val">联票 120 元</span></div>
+      <div class="info-row"><span class="info-key">开放</span><span class="info-val">08:30–18:00</span></div>
+      <div class="info-row"><span class="info-key">地宫</span><span class="info-val a">未开放</span></div>
+      <div class="info-row"><span class="info-key">推荐</span><span class="info-val"><span class="rating-stars">★★★★★</span></span></div>
+      <div class="sb-cta">
+        <a href="#partner" class="cta-btn cta-primary">找走陵搭子</a>
+        <a href="#" class="cta-btn cta-secondary">收藏这座墓</a>
+      </div>
+    </div>
+
+    <div class="sidebar-block">
+      <p class="sb-title">附近陵墓</p>
+      <div class="nearby-item">
+        <div class="nearby-dot"></div>
+        <span class="nearby-name">汉阳陵</span>
+        <span class="nearby-dist">约 60km</span>
+      </div>
+      <div class="nearby-item">
+        <div class="nearby-dot"></div>
+        <span class="nearby-name">汉茂陵</span>
+        <span class="nearby-dist">约 80km</span>
+      </div>
+      <div class="nearby-item">
+        <div class="nearby-dot"></div>
+        <span class="nearby-name">唐昭陵</span>
+        <span class="nearby-dist">约 85km</span>
+      </div>
+      <div class="nearby-item">
+        <div class="nearby-dot"></div>
+        <span class="nearby-name">唐乾陵</span>
+        <span class="nearby-dist">约 95km</span>
+      </div>
+    </div>
+
+    <div class="sidebar-block">
+      <p class="sb-title">走陵人评论</p>
+      <div class="comment">
+        <div class="comment-head">
+          <div class="comment-avatar">陕</div>
+          <span class="comment-name">老陕西走陵</span>
+          <span class="comment-date">2024-11</span>
+        </div>
+        <p class="comment-text">封土本体才是震撼所在，兵马俑反而是加分项。傍晚人少光线好，强烈推荐留到闭馆前。</p>
+      </div>
+      <div class="comment">
+        <div class="comment-head">
+          <div class="comment-avatar">秦</div>
+          <span class="comment-name">秦陵专研者</span>
+          <span class="comment-date">2024-09</span>
+        </div>
+        <p class="comment-text">铜车马馆是被严重低估的地方，精细程度远超想象。很多人去完兵马俑就走了，太可惜。</p>
       </div>
     </div>
   </div>
-</a>`;
-  }).join('');
 
-  if (countEl) countEl.textContent = `共 ${tombs.length} 座陵墓`;
+</div><!-- /main -->
+
+<!-- 更多陵墓 -->
+<div class="more-section reveal">
+  <p class="more-title">关中地区其他帝陵</p>
+  <div class="more-grid">
+    <a href="#" class="more-card">
+      <p class="more-era">西汉 · 前188年</p>
+      <h3 class="more-name">汉阳陵</h3>
+      <p class="more-owner">汉景帝 刘启</p>
+      <div class="more-tags">
+        <span class="mtag">帝陵</span>
+        <span class="mtag o">地宫开放</span>
+        <span class="mtag">透明地板</span>
+      </div>
+    </a>
+    <a href="#" class="more-card">
+      <p class="more-era">西汉 · 前87年</p>
+      <h3 class="more-name">汉茂陵</h3>
+      <p class="more-owner">汉武帝 刘彻</p>
+      <div class="more-tags">
+        <span class="mtag">帝陵</span>
+        <span class="mtag o">地面开放</span>
+        <span class="mtag">霍去病墓</span>
+      </div>
+    </a>
+    <a href="#" class="more-card">
+      <p class="more-era">唐朝 · 683年</p>
+      <h3 class="more-name">唐乾陵</h3>
+      <p class="more-owner">唐高宗 · 武则天</p>
+      <div class="more-tags">
+        <span class="mtag">帝陵</span>
+        <span class="mtag">未发掘</span>
+        <span class="mtag">无字碑</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">走 陵</div>
+  <p class="footer-copy">以考古实证，还原曾经真实存在的那个世界</p>
+</footer>
+
+<script>
+// 粒子效果
+const container = document.getElementById('particles');
+for (let i = 0; i < 24; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.cssText = `
+    left: ${20 + Math.random() * 60}%;
+    bottom: ${10 + Math.random() * 40}%;
+    width: ${Math.random() > 0.7 ? 2 : 1}px;
+    height: ${Math.random() > 0.7 ? 2 : 1}px;
+    animation-duration: ${4 + Math.random() * 6}s;
+    animation-delay: ${Math.random() * 5}s;
+    --dx: ${(Math.random() - 0.5) * 40}px;
+  `;
+  container.appendChild(p);
 }
 
-async function loadAndRenderTombs() {
-  try {
-    const res = await fetch('./tombs.json');
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    window._tombsData = data.tombs;
-    renderTombRows(data.tombs);
-  } catch (e) {
-    document.getElementById('tombList').innerHTML =
-      `<div style="padding:32px;color:var(--text2);font-size:0.85rem;">
-        数据加载失败：${e.message}<br>请确认 tombs.json 已上传到仓库根目录
-      </div>`;
-  }
-}
-
-// 筛选（覆盖原有函数）
-function filterTombs(type, btn) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  if (!window._tombsData) return;
-  const filtered = type === 'all'
-    ? window._tombsData
-    : type === 'open'
-      ? window._tombsData.filter(t => t.open_status_key === 'open')
-      : window._tombsData.filter(t => t.dynasty === type);
-  renderTombRows(filtered);
-}
-
-// 搜索（覆盖原有函数）
-function searchTombs(val) {
-  if (!window._tombsData) return;
-  const q = val.trim().toLowerCase();
-  const filtered = !q
-    ? window._tombsData
-    : window._tombsData.filter(t =>
-        [t.tomb_name, t.tomb_owner, t.dynasty, t.location?.city,
-         t.location?.province, ...(t.tags || [])]
-          .join('|').toLowerCase().includes(q)
-      );
-  renderTombRows(filtered);
-}
-
-// 启动
-loadAndRenderTombs();
+// 入场动画
+const io = new IntersectionObserver(
+  entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
+  { threshold: 0.08 }
+);
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
+
 </body>
 </html>
