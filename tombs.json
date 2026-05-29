@@ -1,0 +1,60 @@
+{
+  "tombs": [
+    {
+      "id": "qinshihuang",
+      "tomb_name": "秦始皇陵",
+      "dynasty": "秦朝",
+      "period": "前221—前210年",
+      "tomb_owner": "嬴政（秦始皇帝）",
+      "location": {
+        "province": "陕西省",
+        "city": "西安市临潼区",
+        "site": "骊山北麓"
+      },
+      "open_status": "部分开放",
+      "underground_open": false,
+      "excavation_status": "未发掘",
+      "burial_grade": "帝陵",
+      "visit_score": 5,
+      "mystery_score": 5,
+      "visit_summary": "地上兵马俑震撼无比，地宫封而未开，人类史上最神秘的地下宫殿就在你脚下。",
+      "tags": ["大型陪葬坑", "未发掘", "争议史料"],
+      "key_finds": [
+        { "name": "兵马俑", "category": "陶器", "description": "约8000件真人比例兵俑、战车、战马" },
+        { "name": "铜车马", "category": "青铜器", "description": "迄今出土最大最完整的青铜车马器" }
+      ],
+      "highlight": "以人鱼膏为烛——考古无法证实的千年之谜",
+      "ticket_price": "兵马俑+秦陵联票120元（2024）",
+      "open_hours": "淡季08:30–17:00",
+      "image_url": ""
+    },
+    {
+      "id": "mawangdui",
+      "tomb_name": "马王堆汉墓",
+      "dynasty": "西汉",
+      "period": "前2世纪",
+      "tomb_owner": "辛追夫人（利苍妻）",
+      "location": {
+        "province": "湖南省",
+        "city": "长沙市",
+        "site": "马王堆"
+      },
+      "open_status": "部分开放",
+      "underground_open": false,
+      "excavation_status": "已发掘",
+      "burial_grade": "诸侯墓",
+      "visit_score": 4,
+      "mystery_score": 4,
+      "visit_summary": "2000年前的女性遗体保存完好、皮肤尚有弹性，人类考古史上的奇迹。",
+      "tags": ["保存完好", "出土丝织物", "出土简牍"],
+      "key_finds": [
+        { "name": "辛追遗体", "category": "骨骸", "description": "湿尸，保存极度完整，现藏湖南省博物馆" },
+        { "name": "素纱单衣", "category": "丝织物", "description": "重仅49克，薄如蝉翼" }
+      ],
+      "highlight": "一件衣服只有49克，现代技术无法复制",
+      "ticket_price": "湖南省博物馆免费",
+      "open_hours": "09:00–17:00（周一闭馆）",
+      "image_url": ""
+    }
+  ]
+}
